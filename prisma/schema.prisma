@@ -1,0 +1,199 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Better Auth required tables - following exact schema from documentation
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts      Account[]
+  sessions      Session[]
+  
+  // Add these new relations
+  clientsCreated        Client[] @relation("ClientCreator")
+  clientsUpdated        Client[] @relation("ClientUpdater")
+  clientsEmailSent      Client[] @relation("ClientEmailSender")
+  candidatesCreated     Candidate[] @relation("CandidateCreator")
+  candidatesUpdated     Candidate[] @relation("CandidateUpdater")
+  candidatesEmailSent   Candidate[] @relation("CandidateEmailSender")
+
+  @@map("user")
+}
+
+model Session {
+  id         String   @id @default(cuid())
+  userId     String
+  token      String   @unique
+  expiresAt  DateTime
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+model Account {
+  id                    String   @id @default(cuid())
+  userId                String
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  idToken               String?
+  password              String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, accountId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+
+  @@map("verification")
+}
+
+// Email OTP specific table
+model EmailOTP {
+  id        String   @id @default(cuid())
+  email     String
+  otp       String
+  type      String   // sign-in, email-verification, password-reset
+  attempts  Int      @default(0)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([email, type])
+  @@map("email_otps")
+}
+
+// Client Schema
+model Client {
+  id                    String   @id @default(cuid())
+  clientName            String
+  clientLogo            String?
+  representativeName    String
+  representativeEmail   String
+  representativeMobile  String
+  
+  // Survey Schema (JSON field for flexible structure)
+  surveySchema          Json?
+  
+  // Metadata
+  createdBy             String   // User ID who created this client
+  createdAt             DateTime @default(now())
+  updatedBy             String?  // User ID who last updated this client
+  updatedAt             DateTime @updatedAt
+  
+  // Email tracking
+  surveyEmailSent       Boolean  @default(false)
+  surveyEmailSentAt     DateTime?
+  surveyEmailSentBy     String?  // User ID who sent the email
+  
+  // Survey completion tracking
+  surveyCompleted       Boolean  @default(false)
+  surveyCompletedAt     DateTime?
+  
+  // Relations
+  surveyAnswers         ClientSurveyAnswer[]
+  
+  // Add these new relations
+  creator               User     @relation("ClientCreator", fields: [createdBy], references: [id])
+  updater               User?    @relation("ClientUpdater", fields: [updatedBy], references: [id])
+  emailSender           User?    @relation("ClientEmailSender", fields: [surveyEmailSentBy], references: [id])
+  
+  @@map("clients")
+}
+
+// Client Survey Answers
+model ClientSurveyAnswer {
+  id           String   @id @default(cuid())
+  clientId     String
+  questionId   String   // Reference to question in survey schema
+  answer       String   // or Json for complex answers
+  answeredAt   DateTime @default(now())
+  
+  // Relations
+  client       Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  
+  @@map("client_survey_answers")
+}
+
+// Candidate Schema
+model Candidate {
+  id           String   @id @default(cuid())
+  candidateName String
+  candidateEmail String @unique
+  candidateMobile String
+  
+  // Survey Schema (JSON field for flexible structure)
+  surveySchema Json?
+  
+  // Metadata
+  createdBy    String   // User ID who created this candidate
+  createdAt   DateTime @default(now())
+  updatedBy   String?  // User ID who last updated this candidate
+  updatedAt   DateTime @updatedAt
+  
+  // Email tracking
+  surveyEmailSent       Boolean  @default(false)
+  surveyEmailSentAt     DateTime?
+  surveyEmailSentBy     String?  // User ID who sent the email
+  
+  // Survey completion tracking
+  surveyCompleted       Boolean  @default(false)
+  surveyCompletedAt     DateTime?
+  
+  // Relations
+  surveyAnswers CandidateSurveyAnswer[]
+  
+  // Add these new relations
+  creator               User     @relation("CandidateCreator", fields: [createdBy], references: [id])
+  updater               User?    @relation("CandidateUpdater", fields: [updatedBy], references: [id])
+  emailSender           User?    @relation("CandidateEmailSender", fields: [surveyEmailSentBy], references: [id])
+  
+  @@map("candidates")
+}
+
+// Candidate Survey Answers
+model CandidateSurveyAnswer {
+  id           String   @id @default(cuid())
+  candidateId  String
+  questionId   String   // Reference to question in survey schema
+  answer       String   // or Json for complex answers
+  answeredAt   DateTime @default(now())
+  
+  // Relations
+  candidate    Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  
+  @@map("candidate_survey_answers")
+}

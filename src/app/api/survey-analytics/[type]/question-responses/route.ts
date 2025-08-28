@@ -1,0 +1,115 @@
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/auth";
+
+interface QuestionResponsesRequest {
+  questionId: string;
+  options: string[];
+}
+
+export async function POST(
+  request: NextRequest,
+  { params }: { params: Promise<{ type: string }> }
+) {
+  try {
+    const { type } = await params;
+    const { questionId, options }: QuestionResponsesRequest =
+      await request.json();
+
+    if (!questionId || !options || !Array.isArray(options)) {
+      return NextResponse.json(
+        { error: "Invalid request data" },
+        { status: 400 }
+      );
+    }
+
+    if (type !== "client" && type !== "candidate") {
+      return NextResponse.json(
+        { error: "Invalid type. Must be 'client' or 'candidate'" },
+        { status: 400 }
+      );
+    }
+
+    // Build the question filter based on the question ID
+    // Both client and candidate surveys now use "question_" prefix
+    const questionFilter = `question_${questionId}`;
+
+    let responseCounts: Array<{ option: string; count: number }> = [];
+    let totalResponses = 0;
+
+    if (type === "client") {
+      // Count client survey responses for each option
+      const responses = await prisma.clientSurveyAnswer.findMany({
+        where: {
+          questionId: questionFilter,
+        },
+        select: {
+          answer: true,
+        },
+      });
+
+      // Count occurrences of each option
+      const optionCounts = new Map<string, number>();
+      options.forEach((option) => optionCounts.set(option, 0));
+
+      responses.forEach((response) => {
+        const answer = response.answer;
+        if (optionCounts.has(answer)) {
+          optionCounts.set(answer, (optionCounts.get(answer) || 0) + 1);
+        }
+      });
+
+      responseCounts = Array.from(optionCounts.entries()).map(
+        ([option, count]) => ({
+          option,
+          count,
+        })
+      );
+
+      totalResponses = responses.length;
+    } else {
+      // Count candidate survey responses for each option
+      const responses = await prisma.candidateSurveyAnswer.findMany({
+        where: {
+          questionId: questionFilter,
+        },
+        select: {
+          answer: true,
+        },
+      });
+
+      // Count occurrences of each option
+      const optionCounts = new Map<string, number>();
+      options.forEach((option) => optionCounts.set(option, 0));
+
+      responses.forEach((response) => {
+        const answer = response.answer;
+        if (optionCounts.has(answer)) {
+          optionCounts.set(answer, (optionCounts.get(answer) || 0) + 1);
+        }
+      });
+
+      responseCounts = Array.from(optionCounts.entries()).map(
+        ([option, count]) => ({
+          option,
+          count,
+        })
+      );
+
+      totalResponses = responses.length;
+    }
+
+    return NextResponse.json({
+      success: true,
+      data: responseCounts,
+      totalResponses,
+      questionId,
+      type,
+    });
+  } catch (error) {
+    console.error("Error fetching question responses:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
