@@ -95,7 +95,7 @@ const Page = async ({ params }: PageProps) => {
     // Client exists and hasn't completed the survey - show the survey page
     return (
       <section className="relative">
-        <BaseHeader />
+        <BaseHeader logoClassName="text-white md:text-pa-midnight-regent" />
 
         <TakeSurvey
           title="Client Satisfaction Survey"
@@ -103,18 +103,6 @@ const Page = async ({ params }: PageProps) => {
           url={`/client-satisfaction-survey/survey/${slug}`}
           time="5"
         />
-
-        <div className="h-[100dvh] bg-pa-midnight-regent">
-          <div className="max-w-2xl mx-auto p-8">
-            <h1 className="text-5xl font-bold font-sentient">
-              Client Satisfaction Survey
-            </h1>
-            <div className="mt-4 text-white/80">
-              <p>Welcome, {client.clientName}</p>
-              <p className="text-sm mt-2">Survey ID: {client.id}</p>
-            </div>
-          </div>
-        </div>
       </section>
     );
   } catch (error) {

@@ -33,12 +33,12 @@ export async function sendOTPEmail({ to, otp, type }: SendOTPEmailParams) {
       from: process.env.FROM_EMAIL || "noreply@yourapp.com", // Replace with your verified sender
       subject:
         type === "sign-in"
-          ? "PeopleAsset - Sign In OTP"
+          ? "PeopleAsset Survey Dashboard - Login OTP"
           : type === "email-verification"
             ? "Email Verification OTP"
-            : "PeopleAsset - Password Reset OTP",
+            : "PeopleAsset Survey Dashboard - Password Reset OTP",
       html: emailHtml,
-      text: `PeopleAsset - Your OTP code is: ${otp}. This code will expire in 5 minutes.`,
+      text: `PeopleAsset Survey Dashboard - Your OTP code is: ${otp}. This code will expire in 5 minutes.`,
     };
 
     // Send email

@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --pa-sterling-mist: #ebebed;
+  --pa-sterling-mist: rgb(235, 235, 237);
   --pa-noble-black: #212121;
   --pa-royal-azure: #1623c1;
   --pa-midnight-regent: #001640;
@@ -199,24 +199,25 @@ html {
 
 /* width */
 .pa-scrollbar::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
   border-radius: 10px;
 }
 
 /* Track */
 .pa-scrollbar::-webkit-scrollbar-track {
-  background: var(--pa-midnight-regent);
+  /* background: var(--pa-midnight-regent); */
+  background: transparent;
   border-radius: 10px;
 }
 
 /* Handle */
 .pa-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--pa-royal-azure);
+  background: rgb(235, 235, 237, 0.2);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 .pa-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--pa-carmine-rush);
+  background: rgb(235, 235, 237, 0.25);
   border-radius: 10px;
 }

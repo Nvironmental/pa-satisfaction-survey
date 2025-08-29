@@ -170,7 +170,7 @@ export function ClientForm({
               />
             </div>
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="clientLogo">Client Logo URL</Label>
               <Input
                 className="h-12 placeholder:opacity-50"
@@ -182,7 +182,7 @@ export function ClientForm({
                 placeholder="https://example.com/logo.png"
                 type="url"
               />
-            </div>
+            </div> */}
           </div>
 
           <div className="space-y-2">
@@ -228,7 +228,7 @@ export function ClientForm({
                 onChange={(e) =>
                   handleInputChange("representativeMobile", e.target.value)
                 }
-                placeholder="+1234567890"
+                placeholder="1234567890"
                 type="tel"
                 required
               />

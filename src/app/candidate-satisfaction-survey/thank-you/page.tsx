@@ -34,10 +34,10 @@ const ThankYouPage = () => {
             <div className="text-white/60 text-sm">
               <p>For any questions, please contact us at:</p>
               <a
-                href="mailto:info@peopleasset.in"
+                href="mailto:connect@peopleasset.in"
                 className="text-pa-carmine-rush hover:underline"
               >
-                info@peopleasset.in
+                connect@peopleasset.in
               </a>
             </div>
           </div>

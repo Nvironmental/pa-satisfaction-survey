@@ -60,11 +60,13 @@ const ThankYouPage = () => {
             <h1 className="text-5xl font-bold font-sentient text-white mb-4">
               Thank You!
             </h1>
+            <p className="text-white/80 text-lg leading-relaxed font-sans mb-4">
+              Your responses have been recorded. Your feedback helps us to
+              improve our services and better serve our clients & candidates.
+            </p>
+
             <p className="text-white/80 text-lg leading-relaxed font-sans">
-              Thank you for taking the survey and providing us your valuable
-              feedback. Your responses have been recorded and saved. Your
-              feedback helps us to improve our services and better serve our
-              clients & candidates.
+              You can now close this window.
             </p>
           </div>
 
@@ -72,10 +74,10 @@ const ThankYouPage = () => {
             <div className="text-white/60 text-sm">
               <p>For any questions, please contact us at:</p>
               <Link
-                href="mailto:info@peopleasset.in"
+                href="mailto:connect@peopleasset.in"
                 className="text-pa-carmine-rush hover:underline flux"
               >
-                info@peopleasset.in
+                connect@peopleasset.in
               </Link>
             </div>
           </div>

@@ -125,7 +125,9 @@ const CandidateSurveyResultsSheet = ({
               return (
                 <div
                   key={answer.id}
-                  className="border rounded-md p-4 bg-gray-50"
+                  className={`border rounded-md p-4 bg-gray-50 ${
+                    answer.questionId.includes(".") ? "ml-8" : ""
+                  }`}
                 >
                   <div className="mb-3">
                     <div className="flex items-start gap-2">

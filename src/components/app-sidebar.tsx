@@ -33,6 +33,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Image from "next/image";
+import Logo from "./Logo";
 
 const data = {
   user: {
@@ -169,17 +170,14 @@ export function AppSidebar({
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
-            >
+            <SidebarMenuButton className="data-[slot=sidebar-menu-button]:!p-1.5">
               <a
                 href="https://peopleasset.in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block relative text-5xl font-bold"
               >
-                PeopleAsset
+                <Logo className="text-pa-midnight-regent !w-full" />
                 {/* <Image
                   src="/logo.png"
                   alt="PeopleAsset"

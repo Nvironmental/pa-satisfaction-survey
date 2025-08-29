@@ -165,7 +165,7 @@ export function PaBarChart({
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
-              className="text-[9px]"
+              className="text-[10px]"
               dataKey="option"
               tickLine={false}
               tickMargin={2}
@@ -174,7 +174,17 @@ export function PaBarChart({
               //   value.length > 15 ? value.slice(0, 15) + "..." : value
               // }
             />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <ChartTooltip
+              cursor={false}
+              content={
+                <ChartTooltipContent
+                  hideLabel={false}
+                  formatter={(value) =>
+                    `${((Number(value) / totalResponses) * 100).toFixed(1)} %`
+                  }
+                />
+              }
+            />
             <Bar dataKey="count" fill="var(--chart-1)" radius={8} />
           </BarChart>
         </ChartContainer>

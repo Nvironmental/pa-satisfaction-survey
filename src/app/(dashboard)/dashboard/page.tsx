@@ -157,7 +157,7 @@ export default function DashboardPage() {
         <div className="h-full row-start-2 md:row-start-auto">
           <div className="flex items-center justify-center h-full w-full font-sans">
             <div className="px-4 w-full md:w-8/12">
-              <h1 className="text-3xl font-bold">Sign In with OTP</h1>
+              <h1 className="text-3xl font-bold">Login with OTP</h1>
               <p className="text-sm mt-2">
                 {otpSent
                   ? `We've sent a 6-digit OTP to ${email}`
@@ -275,7 +275,7 @@ export default function DashboardPage() {
       <div className="max-w-md mx-auto px-4">
         <Card>
           <CardHeader className="text-center">
-            <CardTitle className="">Sign In with OTP</CardTitle>
+            <CardTitle className="">Login with OTP</CardTitle>
             <CardDescription>
               Enter your email to receive a one-time password
             </CardDescription>

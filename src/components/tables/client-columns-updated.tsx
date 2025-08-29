@@ -204,7 +204,7 @@ export function createClientColumns({
         const isCompleted = row.getValue("surveyCompleted") as boolean;
         const isSent = row.getValue("surveyEmailSent") as boolean;
 
-        let status: "Not Sent" | "In Progress" | "Completed";
+        let status: "Not Taken" | "In Progress" | "Completed";
         let style: string = "";
         let variant: "secondary" | "default" | "destructive" = "secondary";
         let icon = <XCircle className="h-4 w-4" />;
@@ -220,7 +220,7 @@ export function createClientColumns({
           style = "bg-pa-royal-azure";
           icon = <Clock className="h-4 w-4" />;
         } else {
-          status = "Not Sent";
+          status = "Not Taken";
           variant = "secondary";
           icon = <XCircle className="h-4 w-4" />;
         }

@@ -6,9 +6,8 @@ import { sendOTPEmail, sendVerificationEmail } from "./email";
 
 const prisma = new PrismaClient({
   transactionOptions: {
-    timeout: 60000, // 60 seconds
-    isolationLevel: "RepeatableRead",
-    maxWait: 30000, // 30 seconds
+    timeout: 15000, // 60 seconds
+    maxWait: 15000, // 30 seconds
   },
 });
 

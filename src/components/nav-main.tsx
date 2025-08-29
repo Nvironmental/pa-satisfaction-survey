@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export function NavMain({
   items,
@@ -22,6 +22,7 @@ export function NavMain({
   }[];
 }) {
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <SidebarGroup>
@@ -54,7 +55,11 @@ export function NavMain({
               key={item.title}
             >
               <SidebarMenuButton
-                className="cursor-pointer"
+                className={`cursor-pointer ${
+                  pathname.includes(item.url)
+                    ? "bg-pa-sterling-mist text-pa-royal-azure"
+                    : ""
+                }`}
                 tooltip={item.title}
               >
                 {item.icon && <item.icon />}

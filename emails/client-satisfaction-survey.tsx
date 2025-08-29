@@ -67,8 +67,8 @@ export default function ClientSatisfactionSurveyEmail({
 
           <Section style={section}>
             <Text style={text}>
-              If you have any questions or need assistance, please don&apos;t
-              hesitate to reach out to us.
+              If you have any questions or need assistance, please reach out to
+              us by replying to this email.
             </Text>
 
             <Text style={text}>
@@ -78,7 +78,7 @@ export default function ClientSatisfactionSurveyEmail({
             <Text style={text}>
               Best regards,
               <br />
-              PeopleAsset Team
+              Team PeopleAsset
             </Text>
           </Section>
         </Container>
@@ -121,7 +121,7 @@ const text = {
 
 const buttonContainer = {
   textAlign: "center" as const,
-  margin: "32px 0",
+  margin: "0px 0",
 };
 
 const button = {

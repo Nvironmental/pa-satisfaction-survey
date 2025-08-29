@@ -97,8 +97,8 @@ const Page = async ({ params }: PageProps) => {
 
     // Client exists and hasn't completed the survey - show the survey form
     return (
-      <section className="bg-gradient-to-br from-pa-noble-black via-pa-midnight-regent to-pa-royal-azure text-white h-[100dvh] relative flex items-center justify-center">
-        <BaseHeader />
+      <section className=" bg-pa-midnight-regent text-white h-[100dvh] relative flex items-center justify-center">
+        <BaseHeader logoClassName="text-white" />
 
         <div className="max-w-2xl mx-auto p-8">
           <ClientSurvey clientId={client.id} />

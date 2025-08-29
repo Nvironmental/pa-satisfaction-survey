@@ -34,7 +34,7 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
   const getMessage = () => {
     switch (type) {
       case "sign-in":
-        return "Use this code to sign in to your account:";
+        return "Please use this code to login to the PeopleAsset Survey Dashboard";
       case "email-verification":
         return "Use this code to verify your email address:";
       case "forget-password":
@@ -63,11 +63,9 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
             />
           </div>
 
-          <Heading style={h1}>OTP Code</Heading>
+          <Heading style={h1}>Your OTP</Heading>
 
           <Section style={section}>
-            <Text style={text}>Hello,</Text>
-
             <Text style={text}>{getMessage()}</Text>
 
             <Text style={otpCode}>{otp}</Text>
@@ -77,13 +75,13 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
             </Text>
 
             <Text style={text}>
-              If you didn't request this code, please ignore this email.
+              If you did not request this code, please ignore this email.
             </Text>
 
             <Text style={text}>
               Best regards,
               <br />
-              PeopleAsset Team
+              Team PeopleAsset
             </Text>
           </Section>
         </Container>

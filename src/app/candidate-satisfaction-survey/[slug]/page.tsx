@@ -80,7 +80,7 @@ const Page = async ({ params }: PageProps) => {
 
     return (
       <section className="relative">
-        <BaseHeader />
+        <BaseHeader logoClassName="text-white md:text-pa-midnight-regent" />
 
         <TakeSurvey
           title="Candidate Satisfaction Survey"
