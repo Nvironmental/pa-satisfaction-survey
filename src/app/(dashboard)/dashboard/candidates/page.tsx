@@ -12,12 +12,13 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import DashboardLayoutLoader from "@/components/DashboardLayoutLoader";
 import { SiteHeader } from "@/components/site-header";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { PaBarChartDemo } from "@/components/charts/PaBarChartDemo";
 import { PaBarChart } from "@/components/charts/PaBarChart";
 import { candidate_questions } from "@/lib/questions";
 
 export default function CandidatesPage() {
+  const router = useRouter();
   const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [user, setUser] = useState<{
     id: string;
@@ -54,12 +55,17 @@ export default function CandidatesPage() {
     return <DashboardLayoutLoader />;
   }
 
+  // if (!user) {
+  //   return (
+  //     <div className="flex items-center justify-center h-full">
+  //       <p>Please sign in to view candidates</p>
+  //     </div>
+  //   );
+  // }
+
   if (!user) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <p>Please sign in to view candidates</p>
-      </div>
-    );
+    router.push("/dashboard");
+    return null;
   }
 
   const handleRefresh = async () => {

@@ -12,11 +12,12 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import DashboardLayoutLoader from "@/components/DashboardLayoutLoader";
 import { SiteHeader } from "@/components/site-header";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { PaBarChart } from "@/components/charts/PaBarChart";
 import { client_questions } from "@/lib/questions";
 
 export default function ClientsPage() {
+  const router = useRouter();
   const [clients, setClients] = useState<Client[]>([]);
   const [user, setUser] = useState<{
     id: string;
@@ -63,11 +64,8 @@ export default function ClientsPage() {
   }
 
   if (!user) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <p>Please sign in to view clients</p>
-      </div>
-    );
+    router.push("/dashboard");
+    return null;
   }
 
   return (

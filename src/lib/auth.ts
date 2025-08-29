@@ -4,7 +4,13 @@ import { emailOTP } from "better-auth/plugins";
 import { PrismaClient } from "@prisma/client";
 import { sendOTPEmail, sendVerificationEmail } from "./email";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  transactionOptions: {
+    timeout: 60000, // 60 seconds
+    isolationLevel: "RepeatableRead",
+    maxWait: 30000, // 30 seconds
+  },
+});
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
