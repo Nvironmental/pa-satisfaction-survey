@@ -10,6 +10,7 @@ import { ClientSurveyProvider, useClientSurvey } from "./ClientSurveyProvider";
 import { SurveyQuestion } from "@/lib/types";
 import { FormItem } from "@/components/ui/form";
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
+import { toast } from "sonner";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -70,7 +71,7 @@ const SurveyForm = ({ clientId }: SurveyFormProps) => {
       window.location.href = "/client-satisfaction-survey/thank-you";
     } catch (error) {
       console.error("Error submitting survey:", error);
-      alert(
+      toast.error(
         `Failed to submit survey: ${error instanceof Error ? error.message : "Unknown error"}`
       );
     } finally {

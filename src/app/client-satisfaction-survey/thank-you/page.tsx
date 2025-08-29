@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 const ThankYouPage = () => {
   return (
     <section className="relative">
-      <BaseHeader />
+      <BaseHeader logoClassName="text-white" />
 
       <div className="h-[100dvh] bg-pa-midnight-regent flex items-center justify-center ">
         <div className="max-w-2xl mx-auto p-8 text-center">

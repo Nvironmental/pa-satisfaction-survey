@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { candidateApi } from "@/lib/api";
+import { toast } from "sonner";
 
 interface SurveyFormProps {
   candidateId: string;
@@ -66,7 +67,7 @@ const SurveyForm = ({ candidateId, candidateName }: SurveyFormProps) => {
       window.location.href = "/candidate-satisfaction-survey/thank-you";
     } catch (error) {
       console.error("Error submitting survey:", error);
-      alert("Failed to submit survey. Please try again.");
+      toast.error("Failed to submit survey. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
