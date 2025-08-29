@@ -162,7 +162,7 @@ export function CandidateForm({
   };
 
   return (
-    <Dialog modal={mode === "edit"} open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen}>
       {/* <DialogTrigger asChild>
         <Button size="sm">
           <Plus className="h-4 w-4 mr-2" />

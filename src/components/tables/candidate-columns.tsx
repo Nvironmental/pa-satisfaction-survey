@@ -28,6 +28,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import { CandidateForm } from "@/components/forms/candidate-form";
 import CandidateSurveyResultsSheet from "@/components/candidate-survey-results-sheet";
 import { toast } from "sonner";
+import { DeleteConfirmationDialog } from "@/components/ui/delete-confirmation-dialog";
 import { candidateApi } from "@/lib/api";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { useCreateQueryString } from "@/hooks/queryString";
@@ -291,15 +292,22 @@ export function createCandidateColumns({
 
                 <DropdownMenuSeparator />
 
-                <DropdownMenuItem
-                  onClick={() =>
+                <DeleteConfirmationDialog
+                  trigger={
+                    <DropdownMenuItem
+                      onSelect={(e) => e.preventDefault()}
+                      className="text-red-600 text-xs"
+                    >
+                      <Trash2 className="mr-2 h-4 w-4" />
+                      Delete Candidate
+                    </DropdownMenuItem>
+                  }
+                  title="Delete Candidate"
+                  description={`Are you sure you want to delete "${candidate.candidateName}"? This action cannot be undone and will also delete all associated survey responses.`}
+                  onConfirm={() =>
                     onDeleteClick?.(candidate.id, candidate.candidateName)
                   }
-                  className="text-red-600 text-xs"
-                >
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Delete Candidate
-                </DropdownMenuItem>
+                />
               </DropdownMenuContent>
             </DropdownMenu>
           </Dialog>

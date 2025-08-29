@@ -125,7 +125,7 @@ export function ClientForm({
   };
 
   return (
-    <Dialog modal={mode === "edit"} open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {mode === "create" ? (
           <Button size="sm" className="bg-pa-noble-black text-pa-sterling-mist">

@@ -12,9 +12,10 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import DashboardLayoutLoader from "@/components/DashboardLayoutLoader";
 import { SiteHeader } from "@/components/site-header";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { PaBarChart } from "@/components/charts/PaBarChart";
 import { client_questions } from "@/lib/questions";
+import { toast } from "sonner";
 
 export default function ClientsPage() {
   const router = useRouter();
@@ -54,6 +55,11 @@ export default function ClientsPage() {
     try {
       const clientsData = await clientApi.getClients();
       setClients(clientsData?.data || []);
+
+      // Also trigger URL refresh for DataTable
+      const params = new URLSearchParams(window.location.search);
+      params.set("refresh", Date.now().toString());
+      router.push(`${window.location.pathname}?${params.toString()}`);
     } catch (error) {
       console.error("Error refreshing clients:", error);
     }
@@ -105,13 +111,26 @@ export default function ClientsPage() {
                     columns={createClientColumns({
                       onSuccess: handleRefresh,
                       currentUserId: user.id,
-                      onDeleteClick: (clientId: string, clientName: string) => {
-                        // This will be handled by the column actions
+                      onDeleteClick: async (
+                        clientId: string,
+                        clientName: string
+                      ) => {
+                        try {
+                          toast.loading("Deleting client...");
+                          await clientApi.deleteClient(clientId);
+                          toast.dismiss();
+                          toast.success("Client deleted successfully");
+                          handleRefresh(); // Refresh the table
+                        } catch (error) {
+                          console.error("Error deleting client:", error);
+                          toast.error("Failed to delete client");
+                        }
                       },
                     })}
                     data={clients}
                     searchPlaceholder="Search clients..."
                     currentUserId={user.id}
+                    apiEndpoint="/api/clients"
                   />
                 </TabsContent>
                 <TabsContent value="analytics">

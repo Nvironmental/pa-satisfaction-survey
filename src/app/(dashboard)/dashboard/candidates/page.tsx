@@ -12,10 +12,11 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import DashboardLayoutLoader from "@/components/DashboardLayoutLoader";
 import { SiteHeader } from "@/components/site-header";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { PaBarChartDemo } from "@/components/charts/PaBarChartDemo";
 import { PaBarChart } from "@/components/charts/PaBarChart";
 import { candidate_questions } from "@/lib/questions";
+import { toast } from "sonner";
 
 export default function CandidatesPage() {
   const router = useRouter();
@@ -72,6 +73,11 @@ export default function CandidatesPage() {
     try {
       const candidatesData = await candidateApi.getCandidates();
       setCandidates(candidatesData?.data || []);
+
+      // Also trigger URL refresh for DataTable
+      const params = new URLSearchParams(window.location.search);
+      params.set("refresh", Date.now().toString());
+      router.push(`${window.location.pathname}?${params.toString()}`);
     } catch (error) {
       console.error("Error refreshing candidates:", error);
     }
@@ -116,16 +122,26 @@ export default function CandidatesPage() {
                     columns={createCandidateColumns({
                       onSuccess: handleRefresh,
                       currentUserId: user.id,
-                      onDeleteClick: (
+                      onDeleteClick: async (
                         candidateId: string,
                         candidateName: string
                       ) => {
-                        // This will be handled by the column actions
+                        try {
+                          toast.loading("Deleting candidate...");
+                          await candidateApi.deleteCandidate(candidateId);
+                          toast.dismiss();
+                          toast.success("Candidate deleted successfully");
+                          handleRefresh(); // Refresh the table
+                        } catch (error) {
+                          console.error("Error deleting candidate:", error);
+                          toast.error("Failed to delete candidate");
+                        }
                       },
                     })}
                     data={candidates}
                     searchPlaceholder="Search candidates..."
                     currentUserId={user.id}
+                    apiEndpoint="/api/candidates"
                   />
                 </TabsContent>
 

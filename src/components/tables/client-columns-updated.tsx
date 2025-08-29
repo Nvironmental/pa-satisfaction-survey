@@ -40,6 +40,7 @@ import { Client } from "@/lib/types";
 import { ClientForm } from "@/components/forms/client-form";
 import SurveyResultsSheet from "@/components/survey-results-sheet";
 import { toast } from "sonner";
+import { DeleteConfirmationDialog } from "@/components/ui/delete-confirmation-dialog";
 import { clientApi } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -319,13 +320,22 @@ export function createClientColumns({
 
                 <DropdownMenuSeparator />
 
-                <DropdownMenuItem
-                  onClick={() => onDeleteClick?.(client.id, client.clientName)}
-                  className="text-red-600 text-xs"
-                >
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Delete Client
-                </DropdownMenuItem>
+                <DeleteConfirmationDialog
+                  trigger={
+                    <DropdownMenuItem
+                      onSelect={(e) => e.preventDefault()}
+                      className="text-red-600 text-xs"
+                    >
+                      <Trash2 className="mr-2 h-4 w-4" />
+                      Delete Client
+                    </DropdownMenuItem>
+                  }
+                  title="Delete Client"
+                  description={`Are you sure you want to delete "${client.clientName}"? This action cannot be undone and will also delete all associated survey responses.`}
+                  onConfirm={() =>
+                    onDeleteClick?.(client.id, client.clientName)
+                  }
+                />
               </DropdownMenuContent>
             </DropdownMenu>
           </Dialog>
