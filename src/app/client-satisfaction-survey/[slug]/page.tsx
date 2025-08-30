@@ -95,9 +95,10 @@ const Page = async ({ params }: PageProps) => {
     // Client exists and hasn't completed the survey - show the survey page
     return (
       <section className="relative">
-        <BaseHeader logoClassName="text-white md:text-pa-midnight-regent" />
+        <BaseHeader logoClassName="text-white md:text-pa-midnight-regent w-[200px]" />
 
         <TakeSurvey
+          bannerClassName="hidden md:block"
           title="Client Satisfaction Survey"
           description="At PeopleAsset, our clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we'd greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential."
           url={`/client-satisfaction-survey/survey/${slug}`}

@@ -178,7 +178,7 @@ const SurveyForm = ({ clientId }: SurveyFormProps) => {
     //     Question {currentQuestionIndex + 1} of {processedQuestions.length}
     //   </div> */}
 
-      <div className="h-[calc(100dvh-320px)] pb-2 pr-8 w-full overflow-y-auto pa-scrollbar">
+      <div className="h-[calc(100dvh-190px)] md:h-[calc(100dvh-320px)] pb-2 pr-8 w-full overflow-y-auto pa-scrollbar">
         {/* Main Question */}
 
         <div>

@@ -79,10 +79,10 @@ const Page = async ({ params }: PageProps) => {
     }
 
     return (
-      <section className=" bg-pa-midnight-regent text-white h-[100dvh] relative flex items-center justify-center">
-        <BaseHeader logoClassName="text-white" />
+      <section className=" bg-pa-midnight-regent text-white h-[100dvh] relative flex md:items-center md:justify-center">
+        <BaseHeader logoClassName="text-white w-[150px]" />
 
-        <div className="max-w-2xl mx-auto p-8">
+        <div className="max-w-2xl mx-auto p-8 md:mt-0 mt-12">
           <CandidateSurvey
             candidateId={candidate.id}
             candidateName={candidate.candidateName}

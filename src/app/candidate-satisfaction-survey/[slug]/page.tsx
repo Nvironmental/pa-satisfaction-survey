@@ -80,9 +80,10 @@ const Page = async ({ params }: PageProps) => {
 
     return (
       <section className="relative">
-        <BaseHeader logoClassName="text-white md:text-pa-midnight-regent" />
+        <BaseHeader logoClassName="text-white md:text-pa-midnight-regent w-[200px]" />
 
         <TakeSurvey
+          bannerClassName="hidden md:block"
           title="Candidate Satisfaction Survey"
           description="At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we support professionals like you and represent you to hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities."
           url={`/candidate-satisfaction-survey/survey/${slug}`}

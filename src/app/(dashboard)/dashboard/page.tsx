@@ -66,6 +66,8 @@ export default function DashboardPage() {
 
     setIsSendingOtp(true);
 
+    setOtpSent(true);
+
     try {
       // Send OTP using Better Auth
       const { data, error } = await authClient.emailOtp.sendVerificationOtp({
@@ -74,9 +76,9 @@ export default function DashboardPage() {
       });
 
       if (error) {
-        toast.error(error.message || "Failed to send OTP");
+        toast.error(error.message || "There was an error sending the OTP");
+        setOtpSent(false);
       } else {
-        setOtpSent(true);
         toast.success("OTP sent successfully! Check your email.");
       }
     } catch (err) {
@@ -141,7 +143,7 @@ export default function DashboardPage() {
 
   return (
     <section className="h-[100dvh] grid grid-cols-1 md:grid-cols-2 relative">
-      <BaseHeader logoClassName="text-pa-midnight-regent" />
+      <BaseHeader logoClassName="text-white md:text-pa-midnight-regent" />
       {isLoading || isAuthenticated ? (
         <div className="h-full row-start-2 md:row-start-auto">
           <div className="flex items-center justify-center h-full w-full font-sans">
@@ -155,7 +157,7 @@ export default function DashboardPage() {
         </div>
       ) : (
         <div className="h-full row-start-2 md:row-start-auto">
-          <div className="flex items-center justify-center h-full w-full font-sans">
+          <div className="md:flex hidden items-center justify-center h-full w-full font-sans">
             <div className="px-4 w-full md:w-8/12">
               <h1 className="text-3xl font-bold">Login with OTP</h1>
               <p className="text-sm mt-2">
@@ -235,6 +237,15 @@ export default function DashboardPage() {
                   </div>
                 )}
               </div>
+            </div>
+          </div>
+          <div className="flex md:hidden items-center justify-center h-full w-full font-sans">
+            <div className="px-4 w-full md:w-8/12">
+              <h1 className="text-3xl font-bold">Mobile Access Restricted</h1>
+              <p className="text-sm mt-2">
+                Please access from desktop or laptop to continue using the
+                dashboard.
+              </p>
             </div>
           </div>
         </div>
