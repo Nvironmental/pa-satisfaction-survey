@@ -169,15 +169,15 @@ export function AppSidebar({
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton className="data-[slot=sidebar-menu-button]:!p-1.5">
+          <SidebarMenuItem className="group/logo">
+            <SidebarMenuButton className="data-[slot=sidebar-menu-button]:!p-1.5 group-hover/logo:text-pa-midnight-regent text-white">
               <a
                 href="https://peopleasset.in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block relative text-5xl font-bold"
               >
-                <Logo className="text-pa-midnight-regent !w-full" />
+                <Logo className="text-current !w-10/12" />
                 {/* <Image
                   src="/logo.png"
                   alt="PeopleAsset"

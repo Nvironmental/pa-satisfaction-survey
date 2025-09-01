@@ -28,15 +28,15 @@ export default function CandidateSatisfactionSurveyEmail({
       <Preview>PeopleAsset - Candidate Satisfaction Survey</Preview>
       <Body style={main}>
         <Container style={container}>
-          <div style={{ textAlign: "center", margin: "20px 0" }}>
+          <div style={{ textAlign: "left", margin: "20px 0" }}>
             <Img
-              src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_Blue_LOWRES.png"
+              src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_White_LOWRES.png"
               alt="Candidate Satisfaction Survey"
               style={{
-                width: "200px",
+                width: "250px",
                 height: "auto",
                 display: "block",
-                margin: "0 auto",
+                margin: "0 0",
               }}
             />
           </div>
@@ -87,7 +87,12 @@ export default function CandidateSatisfactionSurveyEmail({
 }
 
 const main = {
-  backgroundColor: "#ffffff",
+  backgroundColor: "#ebebed",
+  backgroundImage: "url('https://survey.peopleasset.in/email-bg.png')",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  textColor: "#ebebed",
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
 };
@@ -99,12 +104,13 @@ const container = {
 };
 
 const h1 = {
-  color: "#333",
-  fontSize: "24px",
+  color: "#ebebed",
+  fontSize: "48px",
+  fontFamily: "sans-serif",
   fontWeight: "bold",
-  margin: "40px 0",
+  margin: "40px 0 0px 0",
   padding: "0",
-  textAlign: "center" as const,
+  textAlign: "left" as const,
 };
 
 const section = {
@@ -112,9 +118,9 @@ const section = {
 };
 
 const text = {
-  color: "#333",
-  fontSize: "16px",
-  lineHeight: "24px",
+  color: "#ebebed",
+  fontSize: "14px",
+  lineHeight: "20px",
   margin: "16px 0",
 };
 
@@ -126,7 +132,7 @@ const buttonContainer = {
 const button = {
   backgroundColor: "#009b77",
   borderRadius: "6px",
-  color: "#fff",
+  color: "#ebebed",
   fontSize: "16px",
   fontWeight: "bold",
   textDecoration: "none",

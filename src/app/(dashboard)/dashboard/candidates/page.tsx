@@ -101,9 +101,12 @@ export default function CandidatesPage() {
           avatar: user.image || "/avatars/default-avatar.svg",
         }}
       />
-      <SidebarInset>
+      <SidebarInset
+        className="!ml-4 bg-no-repeat bg-cover bg-center"
+        style={{ backgroundImage: "url('/bg.jpg')" }}
+      >
         <SiteHeader title="Candidate Survey Dashboard" />
-        <div className="flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col rounded-md">
           <div className="@container/main flex flex-1 flex-col gap-2">
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
               <Tabs defaultValue="candidate-list" className="w-full">

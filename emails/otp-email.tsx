@@ -50,15 +50,15 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
       <Preview>{getSubject()}</Preview>
       <Body style={main}>
         <Container style={container}>
-          <div style={{ textAlign: "center", margin: "20px 0" }}>
+          <div style={{ textAlign: "left", margin: "20px 0" }}>
             <Img
-              src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_Blue_LOWRES.png"
+              src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_White_LOWRES.png"
               alt="Client Satisfaction Survey"
               style={{
-                width: "200px",
+                width: "250px",
                 height: "auto",
                 display: "block",
-                margin: "0 auto",
+                margin: "0 0",
               }}
             />
           </div>
@@ -90,8 +90,47 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
   );
 }
 
+// const main = {
+//   backgroundColor: "#ffffff",
+//   fontFamily:
+//     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+// };
+
+// const container = {
+//   margin: "0 auto",
+//   padding: "20px 0 48px",
+//   maxWidth: "560px",
+// };
+
+// const h1 = {
+//   color: "#333",
+//   fontSize: "24px",
+//   fontWeight: "bold",
+//   margin: "40px 0",
+//   padding: "0",
+//   textAlign: "center" as const,
+// };
+
+// const section = {
+//   padding: "24px",
+//   // backgroundColor: "#f6f9fc",
+//   borderRadius: "8px",
+// };
+
+// const text = {
+//   color: "#333",
+//   fontSize: "16px",
+//   lineHeight: "24px",
+//   margin: "16px 0",
+// };
+
 const main = {
-  backgroundColor: "#ffffff",
+  backgroundColor: "#ebebed",
+  backgroundImage: "url('https://survey.peopleasset.in/email-bg.png')",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  textColor: "#ebebed",
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
 };
@@ -103,25 +142,43 @@ const container = {
 };
 
 const h1 = {
-  color: "#333",
-  fontSize: "24px",
+  color: "#ebebed",
+  fontSize: "48px",
+  fontFamily: "sans-serif",
   fontWeight: "bold",
-  margin: "40px 0",
+  margin: "40px 0 0px 0",
   padding: "0",
-  textAlign: "center" as const,
+  textAlign: "left" as const,
 };
 
 const section = {
-  padding: "24px",
-  // backgroundColor: "#f6f9fc",
-  borderRadius: "8px",
+  padding: "24px 0",
 };
 
 const text = {
-  color: "#333",
-  fontSize: "16px",
-  lineHeight: "24px",
+  color: "#ebebed",
+  fontSize: "14px",
+  lineHeight: "20px",
   margin: "16px 0",
+};
+
+const buttonContainer = {
+  textAlign: "center" as const,
+  margin: "0px 0",
+};
+
+const button = {
+  backgroundColor: "#009b77",
+  borderRadius: "6px",
+  color: "#ebebed",
+  fontSize: "16px",
+  fontWeight: "bold",
+  textDecoration: "none",
+  textAlign: "center" as const,
+  display: "inline-block",
+  padding: "12px 24px",
+  border: "none",
+  cursor: "pointer",
 };
 
 const otpCode = {
