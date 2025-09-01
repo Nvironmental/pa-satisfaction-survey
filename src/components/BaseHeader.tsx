@@ -12,7 +12,7 @@ const BaseHeader = ({
 }) => {
   return (
     <div className={cn("fixed top-0 left-0 right-0 z-50 px-6 py-8", className)}>
-      <Link target="_blank" href="https://peopleasset.com" className="block">
+      <Link target="_blank" href="https://peopleasset.in/" className="block">
         <Logo
           className={cn("text-pa-midnight-regent w-[300px]", logoClassName)}
         />

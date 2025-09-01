@@ -30,7 +30,7 @@ export async function sendOTPEmail({ to, otp, type }: SendOTPEmailParams) {
     // Prepare email content
     const msg = {
       to,
-      from: process.env.FROM_EMAIL || "noreply@yourapp.com", // Replace with your verified sender
+      from: process.env.FROM_EMAIL || "connect@peopleasset.in", // Replace with your verified sender
       subject:
         type === "sign-in"
           ? "PeopleAsset Survey Dashboard - Login OTP"
@@ -67,7 +67,7 @@ export async function sendVerificationEmail({
   try {
     const msg = {
       to,
-      from: process.env.FROM_EMAIL || "noreply@yourapp.com",
+      from: process.env.FROM_EMAIL || "connect@peopleasset.in",
       subject: "Verify your email address",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -123,7 +123,7 @@ export async function sendClientSurveyEmail({
     // Prepare email content
     const msg = {
       to,
-      from: process.env.FROM_EMAIL || "noreply@yourapp.com",
+      from: process.env.FROM_EMAIL || "connect@peopleasset.in",
       subject: "PeopleAsset - Client Satisfaction Survey",
       html: emailHtml,
       text: `Dear ${representativeName}, please complete our client satisfaction survey at: ${surveyLink}`,
@@ -173,7 +173,7 @@ export async function sendCandidateSurveyEmail({
     // Prepare email content
     const msg = {
       to,
-      from: process.env.FROM_EMAIL || "noreply@yourapp.com",
+      from: process.env.FROM_EMAIL || "connect@peopleasset.in",
       subject: "PeopleAsset - Candidate Satisfaction Survey",
       html: emailHtml,
       text: `Dear ${candidateName}, please complete our candidate satisfaction survey at: ${surveyLink}`,
