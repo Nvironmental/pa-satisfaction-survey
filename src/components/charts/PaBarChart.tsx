@@ -170,9 +170,9 @@ export function PaBarChart({
               tickLine={false}
               tickMargin={2}
               axisLine={false}
-              // tickFormatter={(value) =>
-              //   value.length > 15 ? value.slice(0, 15) + "..." : value
-              // }
+              tickFormatter={(value) =>
+                value.length > 25 ? value.slice(0, 25) + "..." : value
+              }
             />
             <ChartTooltip
               cursor={false}

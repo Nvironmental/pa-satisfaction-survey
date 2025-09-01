@@ -22,11 +22,13 @@ const ThankYouPage = () => {
             <h1 className="text-5xl font-bold font-sentient text-white mb-4">
               Thank You!
             </h1>
+            <p className="text-white/80 text-lg leading-relaxed font-sans mb-4">
+              Your responses have been recorded. Your feedback helps us to
+              improve our services and better serve our clients & candidates.
+            </p>
+
             <p className="text-white/80 text-lg leading-relaxed font-sans">
-              Thank you for taking the time to complete our candidate
-              satisfaction survey. Your feedback is invaluable to us and will
-              help us improve our services and better support professionals like
-              you in the future.
+              You can now close this window.
             </p>
           </div>
 

@@ -237,7 +237,7 @@ export function CandidateForm({
                 onChange={(e) =>
                   handleInputChange("candidateMobile", e.target.value)
                 }
-                placeholder="+1234567890"
+                placeholder="1234567890"
                 type="tel"
                 required
               />
