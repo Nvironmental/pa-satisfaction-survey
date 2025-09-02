@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import {
@@ -58,7 +58,7 @@ export default function DashboardPage() {
     checkSession();
   }, [router]);
 
-  const handleSendOtp = async () => {
+  const handleSendOtp = useCallback(async () => {
     if (!email) {
       toast.error("Please enter your email address");
       return;
@@ -86,9 +86,9 @@ export default function DashboardPage() {
     } finally {
       setIsSendingOtp(false);
     }
-  };
+  }, [email]);
 
-  const handleVerifyOtp = async () => {
+  const handleVerifyOtp = useCallback(async () => {
     if (!otp || otp.length !== 6) {
       toast.error("Please enter the 6-digit OTP");
       return;
@@ -122,7 +122,44 @@ export default function DashboardPage() {
     } finally {
       setIsVerifyingOtp(false);
     }
-  };
+  }, [otp, email, router]);
+
+  // Handle keyboard events for Enter key support
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+
+        if (!otpSent) {
+          // On email input screen, Enter should trigger Continue/Send OTP
+          if (email && !isSendingOtp) {
+            handleSendOtp();
+          }
+        } else {
+          // On OTP input screen, Enter should trigger Verify OTP
+          if (otp.length === 6 && !isVerifyingOtp) {
+            handleVerifyOtp();
+          }
+        }
+      }
+    };
+
+    // Add event listener
+    document.addEventListener("keydown", handleKeyPress);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [
+    email,
+    otp,
+    otpSent,
+    isSendingOtp,
+    isVerifyingOtp,
+    handleSendOtp,
+    handleVerifyOtp,
+  ]);
 
   const handleSignOut = async () => {
     try {

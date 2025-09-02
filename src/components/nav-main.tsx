@@ -57,7 +57,7 @@ export function NavMain({
               <SidebarMenuButton
                 className={`cursor-pointer ${
                   pathname.includes(item.url)
-                    ? "bg-pa-sterling-mist text-pa-royal-azure"
+                    ? "bg-pa-sterling-mist text-pa-royal-azure font-semibold"
                     : ""
                 }`}
                 tooltip={item.title}

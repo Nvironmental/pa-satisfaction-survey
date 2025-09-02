@@ -17,7 +17,7 @@ import {
   ChevronLeft,
   Loader2,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { candidateApi } from "@/lib/api";
 import { toast } from "sonner";
 
@@ -73,6 +73,72 @@ const SurveyForm = ({ candidateId, candidateName }: SurveyFormProps) => {
     }
   };
 
+  // Handle keyboard events
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+
+        // Check if current question is answered
+        const mainQuestionField = `question_${currentQuestion.id}`;
+        const mainAnswer = answers[mainQuestionField];
+
+        let canProceedToNext = false;
+
+        // Check if main question is answered
+        if (mainAnswer && mainAnswer.trim() !== "") {
+          // If there's a sub-question and it should be shown, check if it's answered
+          if (shouldShowSub && currentQuestionGroup.subQuestion) {
+            const subQuestionField = `question_${currentQuestionGroup.subQuestion.id}`;
+            const subAnswer = answers[subQuestionField];
+            canProceedToNext = Boolean(subAnswer && subAnswer.trim() !== "");
+          } else {
+            canProceedToNext = true;
+          }
+        }
+
+        if (canProceedToNext) {
+          if (isLastQuestion) {
+            onSubmit();
+          } else {
+            goToNext();
+          }
+        } else {
+          // Show a toast to indicate the question needs to be answered
+          toast.error("Please answer the current question before proceeding");
+        }
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+
+        // Go to previous question if not on the first question
+        if (!isFirstQuestion) {
+          goToPrevious();
+        } else {
+          // Show a toast to indicate we're already on the first question
+          toast.info("You're already on the first question");
+        }
+      }
+    };
+
+    // Add event listener
+    document.addEventListener("keydown", handleKeyPress);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [
+    answers,
+    currentQuestion.id,
+    shouldShowSub,
+    currentQuestionGroup.subQuestion,
+    isLastQuestion,
+    isFirstQuestion,
+    onSubmit,
+    goToNext,
+    goToPrevious,
+  ]);
+
   const renderQuestion = (question: SurveyQuestion, questionId: number) => {
     const fieldName = `question_${questionId}`;
     const currentValue = answers[fieldName] || "";
@@ -101,8 +167,9 @@ const SurveyForm = ({ candidateId, candidateName }: SurveyFormProps) => {
                 key={option}
                 className="flex font-sans items-center gap-3"
               >
-                <div className="has-data-[state=checked]:opacity-100 opacity-50 border-pa-sterling-mist/20 has-data-[state=checked]:border-pa-carmine-rush relative flex w-full items-center flux gap-2 rounded-md border p-4 shadow-xs outline-none">
+                <div className="focus-within:opacity-100 focus-within:border-pa-carmine-rush  has-data-[state=checked]:opacity-100 opacity-50 border-pa-sterling-mist/20 has-data-[state=checked]:border-pa-carmine-rush relative flex w-full items-center flux gap-2 rounded-md border p-4 shadow-xs outline-none">
                   <RadioGroupItem
+                    tabIndex={0}
                     value={option}
                     id={`${fieldName}_${option
                       .replace(/\s+/g, "-")

@@ -106,11 +106,11 @@ export default function CandidatesPage() {
         style={{ backgroundImage: "url('/bg.jpg')" }}
       >
         <SiteHeader title="Candidate Survey Dashboard" />
-        <div className="flex flex-1 flex-col rounded-md">
+        <div className="flex flex-1 flex-col rounded-md bg-[rgba(255,255,255,0.55)]">
           <div className="@container/main flex flex-1 flex-col gap-2">
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
               <Tabs defaultValue="candidate-list" className="w-full">
-                <TabsList className="mx-5">
+                <TabsList className="mx-5 bg-pa-midnight-regent/10">
                   <TabsTrigger value="candidate-list">
                     Candidate List
                   </TabsTrigger>
@@ -150,7 +150,7 @@ export default function CandidatesPage() {
 
                 <TabsContent value="analytics">
                   <div className="space-y-6 px-5 mt-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
                       <PaBarChart
                         question={candidate_questions[1] as SurveyQuestion}
                         type="candidate"

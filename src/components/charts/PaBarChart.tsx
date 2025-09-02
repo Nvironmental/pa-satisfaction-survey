@@ -161,7 +161,7 @@ export function PaBarChart({
         <CardDescription className=""></CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer config={chartConfig} className="h-[300px] w-full">
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
@@ -170,9 +170,9 @@ export function PaBarChart({
               tickLine={false}
               tickMargin={2}
               axisLine={false}
-              tickFormatter={(value) =>
-                value.length > 25 ? value.slice(0, 25) + "..." : value
-              }
+              // tickFormatter={(value) =>
+              //   value.length > 25 ? value.slice(0, 25) + "..." : value
+              // }
             />
             <ChartTooltip
               cursor={false}
@@ -185,7 +185,12 @@ export function PaBarChart({
                 />
               }
             />
-            <Bar dataKey="count" fill="var(--chart-1)" radius={8} />
+            <Bar
+              dataKey="count"
+              fill="var(--chart-1)"
+              radius={8}
+              barSize={100}
+            />
           </BarChart>
         </ChartContainer>
       </CardContent>

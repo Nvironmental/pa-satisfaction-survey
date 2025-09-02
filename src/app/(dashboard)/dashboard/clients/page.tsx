@@ -92,13 +92,16 @@ export default function ClientsPage() {
           avatar: user.image || "/avatars/default-avatar.svg",
         }}
       />
-      <SidebarInset>
+      <SidebarInset
+        className="!ml-4 bg-no-repeat bg-cover bg-center"
+        style={{ backgroundImage: "url('/bg.jpg')" }}
+      >
         <SiteHeader title="Client Survey Dashboard" />
-        <div className="flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col bg-[rgba(255,255,255,0.55)]">
           <div className="@container/main flex flex-1 flex-col gap-2">
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
               <Tabs defaultValue="client-list" className="w-full">
-                <TabsList className="mx-5">
+                <TabsList className="mx-5 bg-pa-midnight-regent/10">
                   <TabsTrigger value="client-list">Client List</TabsTrigger>
                   <TabsTrigger value="analytics">
                     Client Survey Analytics
@@ -135,7 +138,7 @@ export default function ClientsPage() {
                 </TabsContent>
                 <TabsContent value="analytics">
                   <div className="space-y-6 px-5 mt-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
                       <PaBarChart
                         question={client_questions[0] as SurveyQuestion}
                         type="client"
