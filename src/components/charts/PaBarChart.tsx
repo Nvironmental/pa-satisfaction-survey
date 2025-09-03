@@ -55,9 +55,9 @@ export function PaBarChart({
   const [totalScore, setTotalScore] = useState(0);
   const [csatScore, setCsatScore] = useState(0);
 
-  const unweightedCsatScore = (
-    question.weight ? (csatScore / question.weight) * 100 : 0
-  ).toFixed(0);
+  const unweightedCsatScore = question.weight
+    ? (csatScore / question.weight) * 100
+    : 0;
 
   const badgeClasses = {
     low: "bg-pa-cardinal-red text-white font-bold",
@@ -231,7 +231,7 @@ export function PaBarChart({
             <div className="flex gap-2 items-center">
               <p>Unweighted CSAT Score: </p>
               <Badge className={`${badgeClass} text-xs`}>
-                {unweightedCsatScore}%
+                {unweightedCsatScore.toFixed(0)}%
               </Badge>
             </div>
           )}
