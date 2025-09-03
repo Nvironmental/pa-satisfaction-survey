@@ -4,13 +4,14 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --pa-sterling-mist: rgb(235, 235, 237);
+  --pa-sterling-mist: #ebebed;
   --pa-noble-black: #212121;
   --pa-royal-azure: #1623c1;
   --pa-midnight-regent: #001640;
   --pa-dark-azure: #001640;
   --pa-imperial-indigo: #3b4884;
   --pa-carmine-rush: #009b77;
+  --pa-cardinal-red: #bf1736;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -56,6 +57,7 @@
   --color-pa-dark-azure: var(--pa-dark-azure);
   --color-pa-imperial-indigo: var(--pa-imperial-indigo);
   --color-pa-carmine-rush: var(--pa-carmine-rush);
+  --color-pa-cardinal-red: var(--pa-cardinal-red);
   --font-sans: var(--font-manrope);
   --font-sentient: var(--font-sentient);
   --color-sidebar-ring: var(--sidebar-ring);

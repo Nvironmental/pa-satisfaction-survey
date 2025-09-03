@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRightIcon, TrendingUp } from "lucide-react";
+import { Badge } from "../ui/badge";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { useEffect, useState } from "react";
 import { SurveyQuestion } from "@/lib/types";
@@ -51,6 +52,30 @@ export function PaBarChart({
   const [chartData, setChartData] = useState<ChartDataItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalResponses, setTotalResponses] = useState(0);
+  const [totalScore, setTotalScore] = useState(0);
+  const [csatScore, setCsatScore] = useState(0);
+
+  const unweightedCsatScore = (
+    question.weight ? (csatScore / question.weight) * 100 : 0
+  ).toFixed(0);
+
+  const badgeClasses = {
+    low: "bg-pa-cardinal-red text-white font-bold",
+    medium: "bg-amber-600 text-white font-bold",
+    high: "bg-pa-imperial-indigo text-white font-bold",
+    perfect: "bg-pa-carmine-rush text-white font-bold",
+  };
+
+  // https://www.marcomrobot.com/blog/what-is-a-good-csat-score
+
+  const badgeClass =
+    unweightedCsatScore < 40
+      ? badgeClasses.low
+      : unweightedCsatScore > 40 && unweightedCsatScore < 60
+        ? badgeClasses.medium
+        : unweightedCsatScore > 60 && unweightedCsatScore < 80
+          ? badgeClasses.high
+          : badgeClasses.perfect;
 
   useEffect(() => {
     const fetchResponseCounts = async () => {
@@ -79,6 +104,8 @@ export function PaBarChart({
           const data = await response.json();
           setChartData(data.data);
           setTotalResponses(data.totalResponses);
+          setTotalScore(data.totalScore);
+          setCsatScore(data.csatScore);
         }
       } catch (error) {
         console.error("Error fetching response counts:", error);
@@ -195,8 +222,19 @@ export function PaBarChart({
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 leading-none font-medium">
-          Total Responses: {totalResponses} <TrendingUp className="h-4 w-4" />
+        <div className="flex gap-2 leading-none font-medium justify-between w-full">
+          <p className="flex gap-2">
+            Total Responses: {totalResponses} <TrendingUp className="h-4 w-4" />
+          </p>
+
+          {question.weight && (
+            <div className="flex gap-2 items-center">
+              <p>Unweighted CSAT Score: </p>
+              <Badge className={`${badgeClass} text-xs`}>
+                {unweightedCsatScore}%
+              </Badge>
+            </div>
+          )}
         </div>
         {/* <div className="text-muted-foreground leading-tight text-sm">
            {question.question}

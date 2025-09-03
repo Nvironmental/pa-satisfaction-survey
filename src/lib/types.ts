@@ -10,6 +10,8 @@ export interface SurveyQuestion {
   isSubQuestion?: boolean;
   subQuestion?: SurveyQuestion;
   placeholder?: string;
+  weight?: number;
+  score_qualifiers?: string[];
 }
 
 export interface FormData {
@@ -40,6 +42,7 @@ export interface Client {
   surveyEmailSentBy?: string | null;
   surveyCompleted: boolean;
   surveyCompletedAt?: Date | null;
+  score?: number | null;
   creator?: {
     name: string;
     id: string;
@@ -76,6 +79,7 @@ export interface Candidate {
   surveyEmailSentBy?: string | null;
   surveyCompleted: boolean;
   surveyCompletedAt?: Date | null;
+  score?: number | null;
   creator?: {
     name: string;
     id: string;

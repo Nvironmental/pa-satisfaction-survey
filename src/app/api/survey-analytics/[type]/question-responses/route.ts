@@ -35,6 +35,8 @@ export async function POST(
 
     let responseCounts: Array<{ option: string; count: number }> = [];
     let totalResponses = 0;
+    let totalScore = 0;
+    let csatScore = 0;
 
     if (type === "client") {
       // Count client survey responses for each option
@@ -44,10 +46,11 @@ export async function POST(
         },
         select: {
           answer: true,
+          answer_score: true,
         },
       });
 
-      // Count occurrences of each option
+      // Count occurrences of each option and calculate total score
       const optionCounts = new Map<string, number>();
       options.forEach((option) => optionCounts.set(option, 0));
 
@@ -55,6 +58,10 @@ export async function POST(
         const answer = response.answer;
         if (optionCounts.has(answer)) {
           optionCounts.set(answer, (optionCounts.get(answer) || 0) + 1);
+        }
+        // Add to total score
+        if (response.answer_score !== null) {
+          totalScore += response.answer_score;
         }
       });
 
@@ -66,6 +73,7 @@ export async function POST(
       );
 
       totalResponses = responses.length;
+      csatScore = totalResponses > 0 ? totalScore / totalResponses : 0;
     } else {
       // Count candidate survey responses for each option
       const responses = await prisma.candidateSurveyAnswer.findMany({
@@ -74,10 +82,11 @@ export async function POST(
         },
         select: {
           answer: true,
+          answer_score: true,
         },
       });
 
-      // Count occurrences of each option
+      // Count occurrences of each option and calculate total score
       const optionCounts = new Map<string, number>();
       options.forEach((option) => optionCounts.set(option, 0));
 
@@ -85,6 +94,10 @@ export async function POST(
         const answer = response.answer;
         if (optionCounts.has(answer)) {
           optionCounts.set(answer, (optionCounts.get(answer) || 0) + 1);
+        }
+        // Add to total score
+        if (response.answer_score !== null) {
+          totalScore += response.answer_score;
         }
       });
 
@@ -96,12 +109,15 @@ export async function POST(
       );
 
       totalResponses = responses.length;
+      csatScore = totalResponses > 0 ? totalScore / totalResponses : 0;
     }
 
     return NextResponse.json({
       success: true,
       data: responseCounts,
       totalResponses,
+      totalScore: Number(totalScore.toFixed(3)),
+      csatScore: Number(csatScore.toFixed(3)),
       questionId,
       type,
     });

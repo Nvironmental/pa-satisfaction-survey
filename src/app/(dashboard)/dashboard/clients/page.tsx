@@ -17,6 +17,10 @@ import { PaBarChart } from "@/components/charts/PaBarChart";
 import { client_questions } from "@/lib/questions";
 import { toast } from "sonner";
 
+import { Badge } from "@/components/ui/badge";
+import { IconTrendingUp } from "@tabler/icons-react";
+import { Dot } from "lucide-react";
+
 export default function ClientsPage() {
   const router = useRouter();
   const [clients, setClients] = useState<Client[]>([]);
@@ -74,6 +78,29 @@ export default function ClientsPage() {
     return null;
   }
 
+  const score =
+    (clients.reduce((acc, client) => acc + (client.score || 0), 0) /
+      clients.filter((client) => client.surveyCompleted).length) *
+    100;
+
+  const badgeClasses = {
+    low: "bg-pa-cardinal-red text-white font-bold",
+    medium: "bg-amber-600 text-white font-bold",
+    high: "bg-pa-imperial-indigo text-white font-bold",
+    perfect: "bg-pa-carmine-rush text-white font-bold",
+  };
+
+  // https://www.marcomrobot.com/blog/what-is-a-good-csat-score
+
+  const badgeClass =
+    score < 40
+      ? badgeClasses.low
+      : score > 40 && score < 60
+        ? badgeClasses.medium
+        : score > 60 && score < 80
+          ? badgeClasses.high
+          : badgeClasses.perfect;
+
   return (
     <SidebarProvider
       className="min-h-[100dvh] font-sans"
@@ -101,12 +128,26 @@ export default function ClientsPage() {
           <div className="@container/main flex flex-1 flex-col gap-2">
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
               <Tabs defaultValue="client-list" className="w-full">
-                <TabsList className="mx-5 bg-pa-midnight-regent/10">
-                  <TabsTrigger value="client-list">Client List</TabsTrigger>
-                  <TabsTrigger value="analytics">
-                    Client Survey Analytics
-                  </TabsTrigger>
-                </TabsList>
+                <div className="flex items-center justify-between">
+                  <TabsList className="mx-5 bg-pa-midnight-regent/10">
+                    <TabsTrigger value="client-list">Client List</TabsTrigger>
+                    <TabsTrigger value="analytics">
+                      Client Survey Analytics
+                    </TabsTrigger>
+                  </TabsList>
+                  <div className="px-5">
+                    <Badge variant="outline" className={`py-2`}>
+                      <span>Client Average CSAT Score</span>
+
+                      <span
+                        className={`font-bold p-1 ${badgeClass} rounded-md flex items-center gap-0.5`}
+                      >
+                        <span>{score.toFixed(0)}%</span>
+                      </span>
+                    </Badge>
+                  </div>
+                </div>
+
                 <TabsContent value="client-list">
                   <DataTable<Client, unknown>
                     forClient={true}

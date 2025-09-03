@@ -57,6 +57,7 @@ export async function GET(request: NextRequest) {
         updatedAt: true,
         createdBy: true,
         updatedBy: true,
+        score: true,
         creator: {
           select: {
             name: true,

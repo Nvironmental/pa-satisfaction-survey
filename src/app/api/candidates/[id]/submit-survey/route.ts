@@ -1,5 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/auth";
+import { candidate_questions } from "@/lib/questions";
+
+// Function to calculate CSAT score for a single candidate answer
+function calculateCandidateAnswerScore(
+  questionId: string,
+  answer: string
+): number {
+  const question = candidate_questions.find(
+    (q) => "question_" + q.id.toString() === questionId
+  );
+
+  // Skip if question doesn't exist or doesn't have weight
+  if (!question || !question.weight) {
+    return 0;
+  }
+
+  // Skip if no score_qualifiers defined
+  if (!question.score_qualifiers || question.score_qualifiers.length === 0) {
+    return 0;
+  }
+
+  // Check if answer matches any score_qualifier
+  const isQualified = question.score_qualifiers.includes(answer);
+
+  // Return 1 * weight if qualified, 0 if not
+  return isQualified ? 1 * question.weight : 0;
+}
 
 interface SubmitSurveyRequest {
   answers: Array<{
@@ -45,33 +72,44 @@ export async function POST(
 
     // Use a transaction to ensure data consistency
     const result = await prisma.$transaction(async (tx) => {
-      // Save all survey answers
+      // Save all survey answers with calculated scores
+      let totalScore = 0;
+
       const surveyAnswers = await Promise.all(
-        answers.map((answer) =>
-          tx.candidateSurveyAnswer.create({
+        answers.map(async (answer) => {
+          // Calculate score for this answer
+          const answerScore = calculateCandidateAnswerScore(
+            answer.questionId,
+            answer.answer
+          );
+          totalScore += answerScore;
+
+          return tx.candidateSurveyAnswer.create({
             data: {
               candidateId: id,
               questionId: answer.questionId,
               answer: answer.answer,
+              answer_score: answerScore,
             },
-          })
-        )
+          });
+        })
       );
 
-      // Update candidate survey completion status
+      // Update candidate survey completion status with calculated score
       const updatedCandidate = await tx.candidate.update({
         where: { id },
         data: {
           surveyCompleted: true,
           surveyCompletedAt: new Date(),
+          score: totalScore,
         },
       });
 
-      return { surveyAnswers, updatedCandidate };
+      return { surveyAnswers, updatedCandidate, totalScore };
     });
 
     return NextResponse.json({
-      message: "Survey submitted successfully",
+      message: `Survey submitted successfully with CSAT score: ${result.totalScore.toFixed(3)}`,
       data: result,
     });
   } catch (error) {

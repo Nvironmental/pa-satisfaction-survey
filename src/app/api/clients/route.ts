@@ -55,6 +55,7 @@ export async function GET(request: NextRequest) {
         updatedAt: true,
         surveyCompleted: true,
         surveyCompletedAt: true,
+        score: true,
         createdBy: true,
         creator: {
           select: {

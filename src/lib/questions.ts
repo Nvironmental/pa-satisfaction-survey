@@ -46,6 +46,8 @@ export const client_questions = [
       "5 - Fully achieved",
     ],
     type: "radio",
+    weight: 0.125,
+    score_qualifiers: ["4 - Mostly achieved", "5 - Fully achieved"],
   },
   {
     id: 4,
@@ -59,6 +61,8 @@ export const client_questions = [
       "5 - Highly Satisfied",
     ],
     type: "radio",
+    weight: 0.125,
+    score_qualifiers: ["4 - Satisfied", "5 - Highly Satisfied"],
   },
   {
     id: 5,
@@ -75,7 +79,7 @@ export const client_questions = [
       question:
         "How frequently was this progress communicated to you and other stakeholders?",
       options: [
-        "No formal review process was followed",
+        // "No formal review process was followed",
         "Weekly",
         "Bi-weekly",
         "Monthly",
@@ -98,6 +102,11 @@ export const client_questions = [
       "5 - Fully on time / exceeded expectations",
     ],
     type: "radio",
+    weight: 0.1,
+    score_qualifiers: [
+      "4 - On time with minimal deviation",
+      "5 - Fully on time / exceeded expectations",
+    ],
   },
   {
     id: 7,
@@ -111,6 +120,8 @@ export const client_questions = [
       "5 - Extremely likely",
     ],
     type: "radio",
+    weight: 0.25,
+    score_qualifiers: ["4 - Likely", "5 - Extremely likely"],
   },
   {
     id: 8,
@@ -124,6 +135,8 @@ export const client_questions = [
       "5 - Extremely likely",
     ],
     type: "radio",
+    weight: 0.05,
+    score_qualifiers: ["4 - Likely", "5 - Extremely likely"],
   },
   {
     id: 9,
@@ -137,6 +150,8 @@ export const client_questions = [
       "5 - Highly Satisfied",
     ],
     type: "radio",
+    weight: 0.15,
+    score_qualifiers: ["4 - Satisfied", "5 - Highly Satisfied"],
   },
   {
     id: 10,
@@ -177,6 +192,8 @@ export const client_questions = [
       "5 - Extremely clear",
     ],
     type: "radio",
+    weight: 0.05,
+    score_qualifiers: ["4 - Very clear", "5 - Extremely clear"],
   },
   {
     id: 12,
@@ -190,6 +207,11 @@ export const client_questions = [
       "5 - Fully met all objectives",
     ],
     type: "radio",
+    weight: 0.15,
+    score_qualifiers: [
+      "4 - Met most objectives",
+      "5 - Fully met all objectives",
+    ],
   },
   {
     id: 13,
@@ -238,6 +260,7 @@ export const candidate_questions = [
       "Via a reference",
       "Other (specify)",
     ],
+
     subQuestion: {
       id: 2.1,
       parentId: 2,
@@ -262,6 +285,8 @@ export const candidate_questions = [
       "5 - Highly Satisfied",
     ],
     type: "radio",
+    weight: 0.125,
+    score_qualifiers: ["4 - Satisfied", "5 - Highly Satisfied"],
   },
   {
     id: 4,
@@ -269,6 +294,8 @@ export const candidate_questions = [
       "Did the PeopleAsset team keep you posted on a regular basis on the progress of your candidature?",
     options: ["Yes", "No", "Sometimes"],
     type: "radio",
+    weight: 0.125,
+    score_qualifiers: ["Yes"],
   },
   {
     id: 5,
@@ -276,6 +303,8 @@ export const candidate_questions = [
       "Did we assist you during your preparations for your discussions with the client?",
     options: ["Yes", "No", "Sometimes"],
     type: "radio",
+    weight: 0.125,
+    score_qualifiers: ["Yes"],
   },
   {
     id: 6,
@@ -283,6 +312,8 @@ export const candidate_questions = [
       "Did PeopleAsset provide you clarity about the process at the client’s end?",
     options: ["Yes", "No", "Sometimes"],
     type: "radio",
+    weight: 0.125,
+    score_qualifiers: ["Yes"],
   },
   {
     id: 7,
@@ -296,6 +327,8 @@ export const candidate_questions = [
       "5 - Highly Satisfied",
     ],
     type: "radio",
+    weight: 0.15,
+    score_qualifiers: ["4 - Satisfied", "5 - Highly Satisfied"],
   },
   {
     id: 8,
@@ -303,6 +336,8 @@ export const candidate_questions = [
       "Would you refer PeopleAsset to any of your friends / anyone in your network?",
     options: ["Yes", "No", "Maybe"],
     type: "radio",
+    weight: 0.2,
+    score_qualifiers: ["Yes"],
   },
   {
     id: 9,
@@ -316,5 +351,7 @@ export const candidate_questions = [
       "5 - Highly Satisfied",
     ],
     type: "radio",
+    weight: 0.15,
+    score_qualifiers: ["4 - Satisfied", "5 - Highly Satisfied"],
   },
 ];

@@ -36,7 +36,7 @@ import {
   User,
   CircleUserRound,
 } from "lucide-react";
-import { Client } from "@/lib/types";
+import { Client, SurveyQuestion } from "@/lib/types";
 import { ClientForm } from "@/components/forms/client-form";
 import SurveyResultsSheet from "@/components/survey-results-sheet";
 import { toast } from "sonner";
@@ -45,6 +45,7 @@ import { clientApi } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCreateQueryString } from "@/hooks/queryString";
+import { client_questions } from "@/lib/questions";
 
 interface ClientColumnsProps {
   onSuccess?: () => void;
@@ -176,7 +177,7 @@ export function createClientColumns({
           <div className="flex flex-col">
             {isSent ? (
               <>
-                <Badge className="flex items-center gap-1 bg-pa-carmine-rush">
+                <Badge className="flex items-center gap-1 bg-pa-carmine-rush/10 text-pa-carmine-rush font-bold">
                   <CheckCircle className="h-4 w-4" />
                   Sent -{" "}
                   {sentAt ? (
@@ -189,7 +190,10 @@ export function createClientColumns({
                 </Badge>
               </>
             ) : (
-              <Badge variant="secondary" className="flex items-center gap-1">
+              <Badge
+                variant="secondary"
+                className="flex items-center gap-1 font-bold"
+              >
                 <XCircle className="h-4 w-4" />
                 Not Sent
               </Badge>
@@ -213,16 +217,17 @@ export function createClientColumns({
         if (isCompleted) {
           status = "Completed";
           variant = "default";
-          style = "bg-pa-carmine-rush";
+          style = "bg-pa-carmine-rush/10 text-pa-carmine-rush font-bold";
           icon = <CheckCircle className="h-4 w-4" />;
         } else if (isSent) {
           status = "In Progress";
           variant = "default";
-          style = "bg-pa-royal-azure";
+          style = "bg-pa-royal-azure/10 text-pa-royal-azure font-bold";
           icon = <Clock className="h-4 w-4" />;
         } else {
           status = "Not Taken";
           variant = "secondary";
+          style = "font-bold";
           icon = <XCircle className="h-4 w-4" />;
         }
 
@@ -242,6 +247,51 @@ export function createClientColumns({
               </span>
             )}
           </Badge>
+        );
+      },
+    },
+
+    {
+      accessorKey: "score",
+      header: "CSAT Score",
+      cell: ({ row }) => {
+        const score = (row.original.score as number) || 0;
+        const isCompleted = row.original.surveyCompleted;
+        const badgeClasses = {
+          low: "bg-pa-cardinal-red text-white font-bold",
+          medium: "bg-amber-600 text-white font-bold",
+          high: "bg-pa-imperial-indigo text-white font-bold",
+          perfect: "bg-pa-carmine-rush text-white font-bold",
+        };
+
+        // https://www.marcomrobot.com/blog/what-is-a-good-csat-score
+
+        const badgeClass =
+          score < 0.4
+            ? badgeClasses.low
+            : score > 0.4 && score < 0.6
+              ? badgeClasses.medium
+              : score > 0.6 && score < 0.8
+                ? badgeClasses.high
+                : badgeClasses.perfect;
+        return (
+          // if scorre is zero then default formating
+          // if score is greater than 0 but less than 40 then we use red
+          // if score is greater than 40 but less than 60 then we use yellow
+          // if score is greater than 60 but less than 80 then we use green
+          // if score is greater than 80 then we use blue
+
+          <>
+            {isCompleted ? (
+              <div className="flex justify-center">
+                <Badge className={`${badgeClass} text-xs`}>
+                  {(score * 100).toFixed(0) + "%"}
+                </Badge>
+              </div>
+            ) : (
+              <p className="text-xs opacity-50 text-center">-</p>
+            )}
+          </>
         );
       },
     },

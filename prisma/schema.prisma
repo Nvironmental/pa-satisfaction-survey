@@ -123,6 +123,9 @@ model Client {
   surveyCompleted       Boolean  @default(false)
   surveyCompletedAt     DateTime?
   
+  // CSAT Score
+  score                 Float?
+  
   // Relations
   surveyAnswers         ClientSurveyAnswer[]
   
@@ -140,6 +143,7 @@ model ClientSurveyAnswer {
   clientId     String
   questionId   String   // Reference to question in survey schema
   answer       String   // or Json for complex answers
+  answer_score Float?   // Calculated score for this answer
   answeredAt   DateTime @default(now())
   
   // Relations
@@ -173,6 +177,9 @@ model Candidate {
   surveyCompleted       Boolean  @default(false)
   surveyCompletedAt     DateTime?
   
+  // CSAT Score
+  score                 Float?
+  
   // Relations
   surveyAnswers CandidateSurveyAnswer[]
   
@@ -190,6 +197,7 @@ model CandidateSurveyAnswer {
   candidateId  String
   questionId   String   // Reference to question in survey schema
   answer       String   // or Json for complex answers
+  answer_score Float?   // Calculated score for this answer
   answeredAt   DateTime @default(now())
   
   // Relations
