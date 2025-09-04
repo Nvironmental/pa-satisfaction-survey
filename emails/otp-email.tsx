@@ -50,7 +50,7 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
       <Preview>{getSubject()}</Preview>
       <Body style={main}>
         <Container style={container}>
-          <div style={{ textAlign: "left", margin: "20px 0" }}>
+          <div style={header}>
             <Img
               src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_White_LOWRES.png"
               alt="Client Satisfaction Survey"
@@ -63,25 +63,31 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
             />
           </div>
 
-          <Heading style={h1}>Your OTP</Heading>
+          {/* <Heading style={h1}>Your OTP</Heading> */}
 
           <Section style={section}>
-            <Text style={text}>{getMessage()}</Text>
-
-            <Text style={otpCode}>{otp}</Text>
-
             <Text style={text}>
-              This code will expire in 5 minutes for security reasons.
+              Please use this code to login to the PeopleAsset Survey Dashboard
             </Text>
 
+            <div style={otpCodeContainer}>
+              <Text style={otpCode}>{349638}</Text>
+            </div>
+
             <Text style={text}>
-              If you did not request this code, please ignore this email.
+              This code will expire in 5 minutes for security reasons. If you
+              did not request this code, please ignore this email.
             </Text>
 
             <Text style={text}>
               Best regards,
               <br />
               Team PeopleAsset
+            </Text>
+
+            <Text style={copyrightText}>
+              ExecHunt (India) Pvt Ltd has the exclusive and legal rights for
+              usage of TalentLab as its logo/trademark.
             </Text>
           </Section>
         </Container>
@@ -125,14 +131,29 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
 // };
 
 const main = {
-  backgroundColor: "#ebebed",
-  backgroundImage: "url('https://survey.peopleasset.in/email-bg.png')",
+  backgroundColor: "#F4F4F4",
+  textColor: "#333333",
+  fontFamily:
+    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+};
+
+const header = {
+  textAlign: "center" as const,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundImage: "url('http://localhost:3000/email-bg.jpg')",
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
-  textColor: "#ebebed",
-  fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+  height: "217px",
+};
+
+const otpCodeContainer = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  margin: "16px 0",
 };
 
 const container = {
@@ -152,13 +173,14 @@ const h1 = {
 };
 
 const section = {
-  padding: "24px 0",
+  padding: "24px 48px",
+  backgroundColor: "#F4F4F4",
 };
 
 const text = {
-  color: "#ebebed",
+  color: "#333333",
   fontSize: "14px",
-  lineHeight: "20px",
+  lineHeight: "22px",
   margin: "16px 0",
 };
 
@@ -182,15 +204,23 @@ const button = {
 };
 
 const otpCode = {
-  backgroundColor: "#f4f4f4",
+  backgroundColor: "#DDDFE4",
   borderRadius: "4px",
   color: "#333",
-  fontSize: "32px",
-  fontWeight: "bold",
-  letterSpacing: "6px",
-  lineHeight: "40px",
-  padding: "16px",
-  margin: "32px 0",
+  fontSize: "24px",
+  fontWeight: 600,
+  letterSpacing: "20px",
+  lineHeight: "24px",
+  padding: "16px 24px",
+  // margin: "32px 0",
   textAlign: "center" as const,
-  fontFamily: "monospace",
+};
+
+const copyrightText = {
+  color: "#333333",
+  opacity: 0.5,
+  fontSize: "8px",
+  lineHeight: "16px",
+  margin: "16px 0 0 0",
+  textAlign: "left" as const,
 };
