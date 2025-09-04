@@ -259,7 +259,7 @@ export function DataTable<TData, TValue>({
             <>
               Showing {(currentPage - 1) * currentLimit + 1} to{" "}
               {Math.min(currentPage * currentLimit, totalRows)} of {totalRows}{" "}
-              row(s) total.
+              total row(s).
             </>
           ) : (
             "No rows to display."

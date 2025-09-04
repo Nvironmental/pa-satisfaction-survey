@@ -218,7 +218,7 @@ export function createCandidateColumns({
     },
     {
       accessorKey: "score",
-      header: "CSAT Score",
+      header: "Candidate CSAT Score",
       cell: ({ row }) => {
         const score = (row.original.score as number) || 0;
         const isCompleted = row.original.surveyCompleted;
@@ -257,7 +257,7 @@ export function createCandidateColumns({
     },
     {
       accessorKey: "createdAt",
-      header: "Created",
+      header: "Created By",
       cell: ({ row }) => {
         const candidate = row.original;
         return (

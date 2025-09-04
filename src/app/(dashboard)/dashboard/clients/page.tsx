@@ -137,7 +137,7 @@ export default function ClientsPage() {
                   </TabsList>
                   <div className="px-5">
                     <Badge variant="outline" className={`py-2`}>
-                      <span>Client Average CSAT Score</span>
+                      <span>Average CSAT Score</span>
 
                       <span
                         className={`font-bold p-1 ${badgeClass} rounded-md flex items-center gap-0.5`}

@@ -253,7 +253,7 @@ export function createClientColumns({
 
     {
       accessorKey: "score",
-      header: "CSAT Score",
+      header: "Client CSAT Score",
       cell: ({ row }) => {
         const score = (row.original.score as number) || 0;
         const isCompleted = row.original.surveyCompleted;
