@@ -104,7 +104,11 @@ export default function DashboardPage() {
       });
 
       if (error) {
-        toast.error(error.message || "Invalid OTP");
+        toast.error(
+          error.code === "OTP_EXPIRED"
+            ? "OTP expired"
+            : error.message || "Invalid OTP"
+        );
       } else {
         // Successfully authenticated
         setIsAuthenticated(true);

@@ -170,7 +170,7 @@ export function AppSidebar({
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem className="group/logo">
-            <SidebarMenuButton className="data-[slot=sidebar-menu-button]:!p-1.5 group-hover/logo:text-pa-midnight-regent text-white">
+            <SidebarMenuButton className="hover:bg-transparent hover:text-white">
               <a
                 href="https://peopleasset.in"
                 target="_blank"

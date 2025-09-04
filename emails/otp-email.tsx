@@ -1,11 +1,13 @@
 import {
   Body,
+  Column,
   Container,
   Head,
   Heading,
   Html,
   Img,
   Preview,
+  Row,
   Section,
   Text,
 } from "@react-email/components";
@@ -50,18 +52,23 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
       <Preview>{getSubject()}</Preview>
       <Body style={main}>
         <Container style={container}>
-          <div style={header}>
-            <Img
-              src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_White_LOWRES.png"
-              alt="Client Satisfaction Survey"
-              style={{
-                width: "250px",
-                height: "auto",
-                display: "block",
-                margin: "0 0",
-              }}
-            />
-          </div>
+          <Section style={header}>
+            <Row>
+              <Column align="center">
+                <Img
+                  src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_White_LOWRES.png"
+                  alt="Client Satisfaction Survey"
+                  style={{
+                    width: "250px",
+                    height: "42px",
+                    textAlign: "center" as const,
+                    display: "block",
+                    margin: "0 0",
+                  }}
+                />
+              </Column>
+            </Row>
+          </Section>
 
           {/* <Heading style={h1}>Your OTP</Heading> */}
 
@@ -70,9 +77,11 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
               Please use this code to login to the PeopleAsset Survey Dashboard
             </Text>
 
-            <div style={otpCodeContainer}>
-              <Text style={otpCode}>{349638}</Text>
-            </div>
+            <Row>
+              <Column align="center">
+                <Text style={otpCode}>{otp}</Text>
+              </Column>
+            </Row>
 
             <Text style={text}>
               This code will expire in 5 minutes for security reasons. If you
@@ -139,14 +148,12 @@ const main = {
 
 const header = {
   textAlign: "center" as const,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  backgroundImage: "url('http://localhost:3000/email-bg.jpg')",
+  backgroundImage: "url('https://survey.peopleasset.in/email-bg.jpg')",
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   height: "217px",
+  margin: "0px 0",
 };
 
 const otpCodeContainer = {
@@ -154,6 +161,7 @@ const otpCodeContainer = {
   justifyContent: "center",
   alignItems: "center",
   margin: "16px 0",
+  textAlign: "center" as const,
 };
 
 const container = {
@@ -205,6 +213,7 @@ const button = {
 
 const otpCode = {
   backgroundColor: "#DDDFE4",
+  width: "180px",
   borderRadius: "4px",
   color: "#333",
   fontSize: "24px",

@@ -1,6 +1,7 @@
 import {
   Body,
   Button,
+  Column,
   Container,
   Head,
   Heading,
@@ -8,6 +9,7 @@ import {
   Html,
   Img,
   Preview,
+  Row,
   Section,
   Text,
 } from "@react-email/components";
@@ -28,20 +30,25 @@ export default function CandidateSatisfactionSurveyEmail({
       <Preview>PeopleAsset - Candidate Satisfaction Survey</Preview>
       <Body style={main}>
         <Container style={container}>
-          <div style={{ textAlign: "left", margin: "20px 0" }}>
-            <Img
-              src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_White_LOWRES.png"
-              alt="Candidate Satisfaction Survey"
-              style={{
-                width: "250px",
-                height: "auto",
-                display: "block",
-                margin: "0 0",
-              }}
-            />
-          </div>
+          <Section style={header}>
+            <Row>
+              <Column align="center">
+                <Img
+                  src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_White_LOWRES.png"
+                  alt="Client Satisfaction Survey"
+                  style={{
+                    width: "250px",
+                    height: "42px",
+                    textAlign: "center" as const,
+                    display: "block",
+                    margin: "0 0",
+                  }}
+                />
+              </Column>
+            </Row>
+          </Section>
 
-          <Heading style={h1}>Candidate Satisfaction Survey</Heading>
+          {/* <Heading style={h1}>Candidate Satisfaction Survey</Heading> */}
 
           <Section style={section}>
             <Text style={text}>Dear {candidateName},</Text>
@@ -79,6 +86,11 @@ export default function CandidateSatisfactionSurveyEmail({
               <br />
               Team PeopleAsset
             </Text>
+
+            <Text style={copyrightText}>
+              ExecHunt (India) Pvt Ltd has the exclusive and legal rights for
+              usage of TalentLab as its logo/trademark.
+            </Text>
           </Section>
         </Container>
       </Body>
@@ -87,14 +99,20 @@ export default function CandidateSatisfactionSurveyEmail({
 }
 
 const main = {
-  backgroundColor: "#ebebed",
-  backgroundImage: "url('https://survey.peopleasset.in/email-bg.png')",
+  backgroundColor: "#F4F4F4",
+  textColor: "#333333",
+  fontFamily:
+    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+};
+
+const header = {
+  textAlign: "center" as const,
+  backgroundImage: "url('https://survey.peopleasset.in/email-bg.jpg')",
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
-  textColor: "#ebebed",
-  fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+  height: "217px",
+  margin: "0px 0",
 };
 
 const container = {
@@ -114,11 +132,12 @@ const h1 = {
 };
 
 const section = {
-  padding: "24px 0",
+  padding: "24px 48px",
+  backgroundColor: "#F4F4F4",
 };
 
 const text = {
-  color: "#ebebed",
+  color: "#333",
   fontSize: "14px",
   lineHeight: "20px",
   margin: "16px 0",
@@ -141,4 +160,13 @@ const button = {
   padding: "12px 24px",
   border: "none",
   cursor: "pointer",
+};
+
+const copyrightText = {
+  color: "#333333",
+  opacity: 0.5,
+  fontSize: "8px",
+  lineHeight: "16px",
+  margin: "16px 0 0 0",
+  textAlign: "left" as const,
 };
