@@ -59,8 +59,8 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
                   src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_White_LOWRES.png"
                   alt="Client Satisfaction Survey"
                   style={{
-                    width: "250px",
-                    height: "42px",
+                    width: "300px",
+                    height: "50px",
                     textAlign: "center" as const,
                     display: "block",
                     margin: "0 0",
@@ -166,8 +166,9 @@ const otpCodeContainer = {
 
 const container = {
   margin: "0 auto",
-  padding: "20px 0 48px",
+  padding: "0px 0 48px",
   maxWidth: "560px",
+  backgroundColor: "#fff",
 };
 
 const h1 = {
@@ -182,7 +183,7 @@ const h1 = {
 
 const section = {
   padding: "24px 48px",
-  backgroundColor: "#F4F4F4",
+  backgroundColor: "#fff",
 };
 
 const text = {
@@ -198,7 +199,8 @@ const buttonContainer = {
 };
 
 const button = {
-  backgroundColor: "#009b77",
+  // backgroundColor: "#009b77",
+  backgroundColor: "#001640",
   borderRadius: "6px",
   color: "#ebebed",
   fontSize: "16px",
