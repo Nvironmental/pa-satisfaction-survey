@@ -213,7 +213,7 @@ const button = {
 
 const otpCode = {
   backgroundColor: "#DDDFE4",
-  width: "180px",
+  width: "220px",
   borderRadius: "4px",
   color: "#333",
   fontSize: "24px",
