@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/auth";
 import { client_questions } from "@/lib/questions";
+import { sendThankYouEmail, QuestionAnswer } from "@/lib/email";
 
 // Function to calculate CSAT score for a single answer
 function calculateAnswerScore(questionId: string, answer: string): number {
@@ -48,6 +49,8 @@ export async function POST(
       select: {
         id: true,
         surveyCompleted: true,
+        representativeEmail: true,
+        representativeName: true,
       },
     });
 
@@ -109,6 +112,69 @@ export async function POST(
         totalScore,
       };
     });
+
+    // Prepare questions and answers for thank you email
+    const questionsAndAnswers: QuestionAnswer[] = [];
+
+    for (const [questionId, answer] of Object.entries(answers)) {
+      if (answer && answer !== "") {
+        const questionIdNum = questionId.replace("question_", "");
+        const question = client_questions.find(
+          (q) => q.id.toString() === questionIdNum
+        );
+
+        if (question) {
+          const answerString =
+            typeof answer === "string" ? answer : JSON.stringify(answer);
+
+          // Add main question
+          questionsAndAnswers.push({
+            questionId,
+            question: question.question,
+            answer: answerString,
+            type: question.type,
+          });
+
+          // Check if there's a subquestion and if the answer matches the trigger
+          if (
+            question.subQuestion &&
+            question.subQuestion.parentValue === answerString
+          ) {
+            const subQuestionId = `question_${question.subQuestion.id}`;
+            const subAnswer = answers[subQuestionId];
+
+            if (subAnswer && subAnswer !== "") {
+              const subAnswerString =
+                typeof subAnswer === "string"
+                  ? subAnswer
+                  : JSON.stringify(subAnswer);
+              questionsAndAnswers.push({
+                questionId: subQuestionId,
+                question: question.subQuestion.question,
+                answer: subAnswerString,
+                type: question.subQuestion.type,
+              });
+            }
+          }
+        }
+      }
+    }
+
+    // Send thank you email
+    if (client.representativeEmail && client.representativeName) {
+      try {
+        await sendThankYouEmail({
+          to: client.representativeEmail,
+          name: client.representativeName,
+          surveyType: "client",
+          questionsAndAnswers,
+          totalScore: result.totalScore,
+        });
+      } catch (emailError) {
+        console.error("Failed to send thank you email:", emailError);
+        // Don't fail the request if email sending fails
+      }
+    }
 
     return NextResponse.json({
       success: true,

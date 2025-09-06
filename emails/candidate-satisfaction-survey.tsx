@@ -34,15 +34,11 @@ export default function CandidateSatisfactionSurveyEmail({
             <Row>
               <Column align="center">
                 <Img
-                  src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_White_LOWRES.png"
-                  alt="Client Satisfaction Survey"
-                  style={{
-                    width: "300px",
-                    height: "50px",
-                    textAlign: "center" as const,
-                    display: "block",
-                    margin: "0 0",
-                  }}
+                  src="https://peopleasset.in/mail-assets/survey-header.png"
+                  alt="PeopleAsset Logo"
+                  width="560px"
+                  height="178px"
+                  className="mx-auto my-0 bg-cover bg-center"
                 />
               </Column>
             </Row>
@@ -54,9 +50,9 @@ export default function CandidateSatisfactionSurveyEmail({
             <Text style={text}>Dear {candidateName},</Text>
 
             <Text style={text}>
-              Thank you for your interest in opportunities with our clients. We
-              value your experience and would greatly appreciate your feedback
-              on our services and the recruitment process.
+              Thank you for your interest in pursuing the opportunity with our
+              client. We value your time and would greatly appreciate your
+              feedback on our services and the search process.
             </Text>
 
             <Text style={text}>
@@ -67,9 +63,23 @@ export default function CandidateSatisfactionSurveyEmail({
           </Section>
 
           <Section style={buttonContainer}>
-            <Button style={button} href={surveyLink}>
-              Take Survey
-            </Button>
+            <Row>
+              <Column align="center" style={{ width: "184px" }}></Column>
+              <Column
+                align="center"
+                style={{
+                  backgroundColor: "#001640",
+                  borderRadius: "6px",
+                  margin: "0px 0",
+                  width: "184px",
+                }}
+              >
+                <Button style={button} href={surveyLink}>
+                  Take Survey
+                </Button>
+              </Column>
+              <Column align="center" style={{ width: "184px" }}></Column>
+            </Row>
           </Section>
           <Section style={section}>
             <Text style={text}>
@@ -89,7 +99,7 @@ export default function CandidateSatisfactionSurveyEmail({
 
             <Text style={copyrightText}>
               ExecHunt (India) Pvt Ltd has the exclusive and legal rights for
-              usage of TalentLab as its logo/trademark.
+              usage of PeopleAsset as its logo/trademark.
             </Text>
           </Section>
         </Container>
@@ -103,16 +113,19 @@ const main = {
   textColor: "#333333",
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+  maxWidth: "560px",
 };
 
 const header = {
   textAlign: "center" as const,
-  backgroundImage: "url('https://survey.peopleasset.in/email-bg.jpg')",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  height: "217px",
+  backgroundColor: "#001640",
+  // backgroundImage: "url('https://survey.peopleasset.in/email-bg.jpg')",
+  // backgroundSize: "cover",
+  // backgroundPosition: "center",
+  // backgroundRepeat: "no-repeat",
+  height: "178px",
   margin: "0px 0",
+  maxWidth: "560px",
 };
 
 const container = {
@@ -135,6 +148,7 @@ const h1 = {
 const section = {
   padding: "24px 48px",
   backgroundColor: "#fff",
+  maxWidth: "560px",
 };
 
 const text = {
@@ -147,6 +161,7 @@ const text = {
 const buttonContainer = {
   textAlign: "center" as const,
   margin: "0px 0",
+  maxWidth: "560px",
 };
 
 const button = {

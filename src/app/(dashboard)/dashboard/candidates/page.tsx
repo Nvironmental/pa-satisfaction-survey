@@ -29,6 +29,7 @@ export default function CandidatesPage() {
     image?: string | null;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -163,6 +164,8 @@ export default function CandidatesPage() {
                     columns={createCandidateColumns({
                       onSuccess: handleRefresh,
                       currentUserId: user.id,
+                      isSendingEmail,
+                      setIsSendingEmail,
                       onDeleteClick: async (
                         candidateId: string,
                         candidateName: string

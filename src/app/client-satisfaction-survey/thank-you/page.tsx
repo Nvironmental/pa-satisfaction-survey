@@ -62,7 +62,7 @@ const ThankYouPage = () => {
             </h1>
             <p className="text-white/80 text-lg leading-relaxed font-sans mb-4">
               Your responses have been recorded. Your feedback helps us to
-              improve our services and better serve our clients & candidates.
+              improve our services and better serve our clients and candidates.
             </p>
 
             <p className="text-white/80 text-lg leading-relaxed font-sans">

@@ -31,6 +31,7 @@ export default function ClientsPage() {
     image?: string | null;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -155,6 +156,8 @@ export default function ClientsPage() {
                     columns={createClientColumns({
                       onSuccess: handleRefresh,
                       currentUserId: user.id,
+                      isSendingEmail,
+                      setIsSendingEmail,
                       onDeleteClick: async (
                         clientId: string,
                         clientName: string

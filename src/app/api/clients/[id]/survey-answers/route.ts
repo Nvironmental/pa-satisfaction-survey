@@ -36,6 +36,7 @@ export async function GET(
         questionId: true,
         answer: true,
         answeredAt: true,
+        answer_score: true,
       },
     });
 

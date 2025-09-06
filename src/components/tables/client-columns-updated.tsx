@@ -41,6 +41,7 @@ import { ClientForm } from "@/components/forms/client-form";
 import SurveyResultsSheet from "@/components/survey-results-sheet";
 import { toast } from "sonner";
 import { DeleteConfirmationDialog } from "@/components/ui/delete-confirmation-dialog";
+import { SendEmailConfirmationDialog } from "@/components/ui/send-email-confirmation-dialog";
 import { clientApi } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -51,12 +52,16 @@ interface ClientColumnsProps {
   onSuccess?: () => void;
   currentUserId?: string;
   onDeleteClick?: (clientId: string, clientName: string) => void;
+  isSendingEmail?: boolean;
+  setIsSendingEmail?: (loading: boolean) => void;
 }
 
 export function createClientColumns({
   onSuccess,
   currentUserId,
   onDeleteClick,
+  isSendingEmail = false,
+  setIsSendingEmail,
 }: ClientColumnsProps): ColumnDef<Client>[] {
   const handleSendSurveyEmail = async (client: Client) => {
     if (!currentUserId) {
@@ -64,6 +69,7 @@ export function createClientColumns({
       return;
     }
 
+    setIsSendingEmail?.(true);
     try {
       toast.loading("Sending survey email...");
       // Call the API endpoint which handles both email sending and client record update
@@ -82,6 +88,8 @@ export function createClientColumns({
     } catch (error) {
       toast.error("Failed to send survey email");
       console.error("Error sending survey email:", error);
+    } finally {
+      setIsSendingEmail?.(false);
     }
   };
 
@@ -297,7 +305,7 @@ export function createClientColumns({
     },
     {
       accessorKey: "createdAt",
-      header: "Created",
+      header: "Created By",
       cell: ({ row }) => {
         const client = row.original;
         return (
@@ -357,16 +365,26 @@ export function createClientColumns({
                   </DropdownMenuItem>
                 </DialogTrigger>
 
-                <DropdownMenuItem
-                  onClick={() => handleSendSurveyEmail(client)}
+                <SendEmailConfirmationDialog
+                  trigger={
+                    <DropdownMenuItem
+                      onSelect={(e) => e.preventDefault()}
+                      disabled={isCompleted}
+                      className={`text-xs ${
+                        isCompleted ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                    >
+                      <Mail className="mr-2 h-4 w-4" />
+                      Send Survey Email
+                    </DropdownMenuItem>
+                  }
+                  title="Send Survey Email"
+                  description={`Are you sure you want to send a survey email to ${client.representativeName}? This will send them a link to complete the client satisfaction survey.`}
+                  clientName={client.representativeName}
+                  onConfirm={() => handleSendSurveyEmail(client)}
+                  isLoading={isSendingEmail}
                   disabled={isCompleted}
-                  className={`text-xs ${
-                    isCompleted ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
-                >
-                  <Mail className="mr-2 h-4 w-4" />
-                  Send Survey Email
-                </DropdownMenuItem>
+                />
 
                 <DropdownMenuSeparator />
 

@@ -20,6 +20,7 @@ interface SurveyAnswer {
   questionId: string;
   answer: string;
   answeredAt: string;
+  answer_score: number;
 }
 
 interface CandidateSurveyResultsSheetProps {
@@ -90,14 +91,47 @@ const CandidateSurveyResultsSheet = ({
     }
   };
 
+  const score = (
+    answers.reduce((acc, answer) => acc + (answer.answer_score || 0), 0) * 100
+  ).toFixed(0);
+
+  const badgeClasses = {
+    low: "bg-pa-cardinal-red text-white font-bold",
+    medium: "bg-amber-600 text-white font-bold",
+    high: "bg-pa-imperial-indigo text-white font-bold",
+    perfect: "bg-pa-carmine-rush text-white font-bold",
+  };
+
+  // https://www.marcomrobot.com/blog/what-is-a-good-csat-score
+
+  const badgeClass =
+    parseInt(score) < 40
+      ? badgeClasses.low
+      : parseInt(score) > 40 && parseInt(score) < 60
+        ? badgeClasses.medium
+        : parseInt(score) > 60 && parseInt(score) < 80
+          ? badgeClasses.high
+          : badgeClasses.perfect;
+
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className="overflow-y-auto font-sans !max-w-[800px] p-12">
         <SheetHeader>
-          <SheetTitle className="text-2xl font-light ">
-            Showing survey responses for{" "}
-            <span className="font-bold">{candidateName}</span>
+          <SheetTitle className="text-2xl font-light flex items-center gap-1.5 ">
+            <span>Showing survey responses for </span>
+
+            <span className="flex items-center gap-1.5 ">
+              <span className="font-bold">{candidateName}</span>
+              <span className={`p-1 rounded-md ${badgeClass}`}>
+                {" "}
+                {answers.length > 0 ? (
+                  `${score}%`
+                ) : (
+                  <IconLoader2 className="w-4 h-4 animate-spin" />
+                )}
+              </span>
+            </span>
           </SheetTitle>
         </SheetHeader>
 

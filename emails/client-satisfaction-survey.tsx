@@ -34,20 +34,15 @@ export default function ClientSatisfactionSurveyEmail({
             <Row>
               <Column align="center">
                 <Img
-                  src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_White_LOWRES.png"
-                  alt="Client Satisfaction Survey"
-                  style={{
-                    width: "300px",
-                    height: "50px",
-                    textAlign: "center" as const,
-                    display: "block",
-                    margin: "0 0",
-                  }}
+                  src="https://peopleasset.in/mail-assets/survey-header.png"
+                  alt="PeopleAsset Logo"
+                  width="560px"
+                  height="178px"
+                  className="mx-auto my-0 bg-cover bg-center"
                 />
               </Column>
             </Row>
           </Section>
-
           {/* <Heading style={h1}>Client Satisfaction Survey</Heading> */}
 
           <Section style={section}>
@@ -56,22 +51,35 @@ export default function ClientSatisfactionSurveyEmail({
             <Text style={text}>
               We value your partnership and would greatly appreciate your
               feedback on our services. Your insights help us continuously
-              improve and provide better support to our clients.
+              improve and provide a better experience to our clients.
             </Text>
 
             <Text style={text}>
               Please take a few minutes to complete our brief satisfaction
               survey. Your responses are confidential and will be used solely to
-              enhance our service quality.
+              improve the quality of our client engagements.
             </Text>
           </Section>
 
           <Section style={buttonContainer}>
-            <Button style={button} href={surveyLink}>
-              Take Survey
-            </Button>
+            <Row>
+              <Column align="center" style={{ width: "184px" }}></Column>
+              <Column
+                align="center"
+                style={{
+                  backgroundColor: "#001640",
+                  borderRadius: "6px",
+                  margin: "0px 0",
+                  width: "184px",
+                }}
+              >
+                <Button style={button} href={surveyLink}>
+                  Take Survey
+                </Button>
+              </Column>
+              <Column align="center" style={{ width: "184px" }}></Column>
+            </Row>
           </Section>
-
           <Section style={section}>
             <Text style={text}>
               If you have any questions or need assistance, please reach out to
@@ -89,7 +97,7 @@ export default function ClientSatisfactionSurveyEmail({
             </Text>
             <Text style={copyrightText}>
               ExecHunt (India) Pvt Ltd has the exclusive and legal rights for
-              usage of TalentLab as its logo/trademark.
+              usage of PeopleAsset as its logo/trademark.
             </Text>
           </Section>
         </Container>
@@ -101,18 +109,20 @@ export default function ClientSatisfactionSurveyEmail({
 const main = {
   backgroundColor: "#F4F4F4",
   textColor: "#333333",
+  maxWidth: "560px",
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
 };
 
 const header = {
   textAlign: "center" as const,
-  backgroundImage: "url('https://survey.peopleasset.in/email-bg.jpg')",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
+  // backgroundImage: "url('https://survey.peopleasset.in/email-bg.jpg')",
+  // backgroundSize: "cover",
+  // backgroundPosition: "center",
+  // backgroundRepeat: "no-repeat",
   height: "217px",
   margin: "0px 0",
+  maxWidth: "560px",
 };
 
 const container = {
@@ -135,6 +145,7 @@ const h1 = {
 const section = {
   padding: "24px 48px",
   backgroundColor: "#fff",
+  maxWidth: "560px",
 };
 
 const text = {
@@ -147,6 +158,7 @@ const text = {
 const buttonContainer = {
   textAlign: "center" as const,
   margin: "0px 0",
+  maxWidth: "560px",
 };
 
 const button = {

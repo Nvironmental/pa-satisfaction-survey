@@ -56,15 +56,11 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
             <Row>
               <Column align="center">
                 <Img
-                  src="https://peopleasset.in/mail-assets/PA_Identity_FINAL_White_LOWRES.png"
-                  alt="Client Satisfaction Survey"
-                  style={{
-                    width: "300px",
-                    height: "50px",
-                    textAlign: "center" as const,
-                    display: "block",
-                    margin: "0 0",
-                  }}
+                  src="https://peopleasset.in/mail-assets/survey-header.png"
+                  alt="PeopleAsset Logo"
+                  width="560px"
+                  height="178px"
+                  className="mx-auto my-0 bg-cover bg-center"
                 />
               </Column>
             </Row>
@@ -96,7 +92,7 @@ export default function OTPEmail({ otp, type, email }: OTPEmailProps) {
 
             <Text style={copyrightText}>
               ExecHunt (India) Pvt Ltd has the exclusive and legal rights for
-              usage of TalentLab as its logo/trademark.
+              usage of PeopleAsset as its logo/trademark.
             </Text>
           </Section>
         </Container>
@@ -144,16 +140,17 @@ const main = {
   textColor: "#333333",
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+  maxWidth: "560px",
 };
-
 const header = {
   textAlign: "center" as const,
-  backgroundImage: "url('https://survey.peopleasset.in/email-bg.jpg')",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
+  // backgroundImage: "url('https://survey.peopleasset.in/email-bg.jpg')",
+  // backgroundSize: "cover",
+  // backgroundPosition: "center",
+  // backgroundRepeat: "no-repeat",
   height: "217px",
   margin: "0px 0",
+  maxWidth: "560px",
 };
 
 const otpCodeContainer = {
@@ -184,6 +181,7 @@ const h1 = {
 const section = {
   padding: "24px 48px",
   backgroundColor: "#fff",
+  maxWidth: "560px",
 };
 
 const text = {
@@ -196,6 +194,7 @@ const text = {
 const buttonContainer = {
   textAlign: "center" as const,
   margin: "0px 0",
+  maxWidth: "560px",
 };
 
 const button = {

@@ -3,6 +3,7 @@ import { render } from "@react-email/render";
 import OTPEmail from "../../emails/otp-email";
 import ClientSatisfactionSurveyEmail from "../../emails/client-satisfaction-survey";
 import CandidateSatisfactionSurveyEmail from "../../emails/candidate-satisfaction-survey";
+import ThankYouEmail from "../../emails/thank-you-email";
 
 // Initialize SendGrid with API key
 if (process.env.SENDGRID_API_KEY) {
@@ -186,6 +187,69 @@ export async function sendCandidateSurveyEmail({
     return { success: true };
   } catch (error) {
     console.error("Error sending candidate survey email:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+
+export interface QuestionAnswer {
+  questionId: string;
+  question: string;
+  answer: string;
+  type: string;
+}
+
+export interface SendThankYouEmailParams {
+  to: string;
+  name: string;
+  surveyType: "client" | "candidate";
+  questionsAndAnswers: QuestionAnswer[];
+  totalScore?: number;
+}
+
+export async function sendThankYouEmail({
+  to,
+  name,
+  surveyType,
+  questionsAndAnswers,
+  totalScore,
+}: SendThankYouEmailParams) {
+  try {
+    // Render the email template
+    const emailHtml = await render(
+      ThankYouEmail({
+        name,
+        surveyType,
+        questionsAndAnswers,
+        totalScore,
+      })
+    );
+
+    // Ensure emailHtml is a string
+    if (typeof emailHtml !== "string") {
+      throw new Error(
+        `Failed to render email template. Got type: ${typeof emailHtml}`
+      );
+    }
+
+    // Prepare email content
+    const msg = {
+      to,
+      from: process.env.FROM_EMAIL || "connect@peopleasset.in",
+      subject: `PeopleAsset - Thank You for Completing the ${surveyType === "client" ? "Client" : "Candidate"} Satisfaction Survey`,
+      html: emailHtml,
+      text: `Dear ${name}, thank you for completing the ${surveyType} satisfaction survey. Your responses have been recorded.`,
+    };
+
+    // Send email
+    await sgMail.send(msg);
+
+    console.log(`Thank you email sent successfully to ${to}`);
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending thank you email:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : "Unknown error",

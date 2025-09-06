@@ -29,6 +29,7 @@ import { CandidateForm } from "@/components/forms/candidate-form";
 import CandidateSurveyResultsSheet from "@/components/candidate-survey-results-sheet";
 import { toast } from "sonner";
 import { DeleteConfirmationDialog } from "@/components/ui/delete-confirmation-dialog";
+import { SendEmailConfirmationDialog } from "@/components/ui/send-email-confirmation-dialog";
 import { candidateApi } from "@/lib/api";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { useCreateQueryString } from "@/hooks/queryString";
@@ -39,12 +40,16 @@ interface CandidateColumnsProps {
   onSuccess?: () => void;
   currentUserId?: string;
   onDeleteClick?: (candidateId: string, candidateName: string) => void;
+  isSendingEmail?: boolean;
+  setIsSendingEmail?: (loading: boolean) => void;
 }
 
 export function createCandidateColumns({
   onSuccess,
   currentUserId,
   onDeleteClick,
+  isSendingEmail = false,
+  setIsSendingEmail,
 }: CandidateColumnsProps): ColumnDef<Candidate>[] {
   const handleSendSurveyEmail = async (candidate: Candidate) => {
     if (!currentUserId) {
@@ -52,6 +57,7 @@ export function createCandidateColumns({
       return;
     }
 
+    setIsSendingEmail?.(true);
     try {
       toast.loading("Sending survey email...");
       // Call the API endpoint which handles both email sending and candidate record update
@@ -69,6 +75,8 @@ export function createCandidateColumns({
     } catch (error) {
       toast.error("Failed to send survey email");
       console.error("Error sending survey email:", error);
+    } finally {
+      setIsSendingEmail?.(false);
     }
   };
 
@@ -322,16 +330,26 @@ export function createCandidateColumns({
                   </DropdownMenuItem>
                 </DialogTrigger>
 
-                <DropdownMenuItem
-                  onClick={() => handleSendSurveyEmail(candidate)}
+                <SendEmailConfirmationDialog
+                  trigger={
+                    <DropdownMenuItem
+                      onSelect={(e) => e.preventDefault()}
+                      disabled={isCompleted}
+                      className={`text-xs ${
+                        isCompleted ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                    >
+                      <Mail className="mr-2 h-4 w-4" />
+                      Send Survey Email
+                    </DropdownMenuItem>
+                  }
+                  title="Send Survey Email"
+                  description={`Are you sure you want to send a survey email to ${candidate.candidateName}? This will send them a link to complete the candidate satisfaction survey.`}
+                  clientName={candidate.candidateName}
+                  onConfirm={() => handleSendSurveyEmail(candidate)}
+                  isLoading={isSendingEmail}
                   disabled={isCompleted}
-                  className={`text-xs ${
-                    isCompleted ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
-                >
-                  <Mail className="mr-2 h-4 w-4" />
-                  Send Survey Email
-                </DropdownMenuItem>
+                />
 
                 <DropdownMenuSeparator />
 
