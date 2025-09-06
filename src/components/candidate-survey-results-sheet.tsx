@@ -3,16 +3,15 @@
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { candidate_questions } from "@/lib/questions";
-import { IconLoader2 } from "@tabler/icons-react";
 import { ArrowRightIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Skeleton } from "./ui/skeleton";
+import { Badge } from "./ui/badge";
 
 interface SurveyAnswer {
   id: string;
@@ -117,22 +116,25 @@ const CandidateSurveyResultsSheet = ({
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className="overflow-y-auto font-sans !max-w-[800px] p-12">
-        <SheetHeader>
-          <SheetTitle className="text-2xl font-light flex items-center gap-1.5 ">
+        <SheetHeader className="px-0">
+          <SheetTitle className="text-2xl font-light flex items-center gap-1.5">
             <span>Showing survey responses for </span>
 
             <span className="flex items-center gap-1.5 ">
               <span className="font-bold">{candidateName}</span>
-              <span className={`p-1 rounded-md ${badgeClass}`}>
-                {" "}
-                {answers.length > 0 ? (
-                  `${score}%`
-                ) : (
-                  <IconLoader2 className="w-4 h-4 animate-spin" />
-                )}
-              </span>
             </span>
           </SheetTitle>
+          <div className="">
+            <Badge variant="outline" className={`py-2`}>
+              <span> CSAT Score</span>
+
+              <span
+                className={`font-bold p-1 ${badgeClass} rounded-md flex items-center gap-0.5`}
+              >
+                <span>{score}%</span>
+              </span>
+            </Badge>
+          </div>
         </SheetHeader>
 
         <div className="mt-6 space-y-6">

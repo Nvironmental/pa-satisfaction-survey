@@ -34,7 +34,7 @@ export async function sendOTPEmail({ to, otp, type }: SendOTPEmailParams) {
       from: process.env.FROM_EMAIL || "connect@peopleasset.in", // Replace with your verified sender
       subject:
         type === "sign-in"
-          ? "PeopleAsset Survey Dashboard - Login OTP"
+          ? "Survey Dashboard - Login OTP"
           : type === "email-verification"
             ? "Email Verification OTP"
             : "PeopleAsset Survey Dashboard - Password Reset OTP",
@@ -238,7 +238,7 @@ export async function sendThankYouEmail({
     const msg = {
       to,
       from: process.env.FROM_EMAIL || "connect@peopleasset.in",
-      subject: `PeopleAsset - Thank You for Completing the ${surveyType === "client" ? "Client" : "Candidate"} Satisfaction Survey`,
+      subject: `PeopleAsset - Thank You for Sharing Your Feedback`,
       html: emailHtml,
       text: `Dear ${name}, thank you for completing the ${surveyType} satisfaction survey. Your responses have been recorded.`,
     };

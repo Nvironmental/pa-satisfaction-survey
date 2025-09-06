@@ -379,7 +379,7 @@ export function createClientColumns({
                     </DropdownMenuItem>
                   }
                   title="Send Survey Email"
-                  description={`Are you sure you want to send a survey email to ${client.representativeName}? This will send them a link to complete the client satisfaction survey.`}
+                  description={`This action will trigger an email, click on Send Email to continue`}
                   clientName={client.representativeName}
                   onConfirm={() => handleSendSurveyEmail(client)}
                   isLoading={isSendingEmail}

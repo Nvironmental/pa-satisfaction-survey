@@ -27,17 +27,18 @@ export default function ClientSatisfactionSurveyEmail({
   return (
     <Html>
       <Head />
-      <Preview>Client Satisfaction Survey - Your Feedback Matters</Preview>
+      <Preview>PeopleAsset - Client Satisfaction Survey</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={header}>
-            <Row>
-              <Column align="center">
+            <Row style={{ margin: "0px 0" }}>
+              <Column align="center" style={{ margin: "0px 0" }}>
                 <Img
-                  src="https://peopleasset.in/mail-assets/survey-header.png"
+                  src="https://peopleasset.in/mail-assets/survey-header-2.png"
+                  srcSet="https://peopleasset.in/mail-assets/survey-header.png 1x, https://peopleasset.in/mail-assets/survey-header-2.png 2x"
                   alt="PeopleAsset Logo"
-                  width="560px"
-                  height="178px"
+                  width="560"
+                  height="178"
                   className="mx-auto my-0 bg-cover bg-center"
                 />
               </Column>

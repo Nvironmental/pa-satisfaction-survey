@@ -178,6 +178,7 @@ export default function ThankYouEmail({
               <Column align="center">
                 <Img
                   src="https://peopleasset.in/mail-assets/survey-header.png"
+                  srcSet="https://peopleasset.in/mail-assets/survey-header.png 1x, https://peopleasset.in/mail-assets/survey-header-2.png 2x"
                   alt="PeopleAsset Logo"
                   width="560px"
                   height="178px"
