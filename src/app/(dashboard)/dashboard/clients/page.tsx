@@ -80,7 +80,10 @@ export default function ClientsPage() {
   }
 
   const score =
-    (clients.reduce((acc, client) => acc + (client.score || 0), 0) /
+    (clients.reduce(
+      (acc, client) => acc + (client.surveyCompleted ? client.score || 0 : 0),
+      0
+    ) /
       clients.filter((client) => client.surveyCompleted).length) *
     100;
 

@@ -86,7 +86,11 @@ export default function CandidatesPage() {
   };
 
   const score =
-    (candidates.reduce((acc, candidate) => acc + (candidate.score || 0), 0) /
+    (candidates.reduce(
+      (acc, candidate) =>
+        acc + (candidate.surveyCompleted ? candidate.score || 0 : 0),
+      0
+    ) /
       candidates.filter((candidate) => candidate.surveyCompleted).length) *
     100;
 
