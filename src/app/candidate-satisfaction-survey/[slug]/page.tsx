@@ -90,13 +90,13 @@ const Page = async ({ params }: PageProps) => {
           time="5"
         />
 
-        <div className="h-[100dvh] bg-pa-midnight-regent">
+        {/* <div className="h-[100dvh] bg-pa-midnight-regent">
           <div className="max-w-2xl mx-auto p-8">
             <h1 className="text-5xl font-bold font-sentient">
               Candidate Satisfaction Survey
             </h1>
           </div>
-        </div>
+        </div> */}
       </section>
     );
   } catch (error) {
