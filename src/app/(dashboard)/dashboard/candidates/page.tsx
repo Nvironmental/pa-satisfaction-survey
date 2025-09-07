@@ -86,13 +86,15 @@ export default function CandidatesPage() {
   };
 
   const score =
-    (candidates.reduce(
-      (acc, candidate) =>
-        acc + (candidate.surveyCompleted ? candidate.score || 0 : 0),
-      0
-    ) /
-      candidates.filter((candidate) => candidate.surveyCompleted).length) *
-    100;
+    candidates.filter((candidate) => candidate.surveyCompleted).length > 0
+      ? (candidates.reduce(
+          (acc, candidate) =>
+            acc + (candidate.surveyCompleted ? candidate.score || 0 : 0),
+          0
+        ) /
+          candidates.filter((candidate) => candidate.surveyCompleted).length) *
+        100
+      : 0;
 
   const badgeClasses = {
     low: "bg-pa-cardinal-red text-white font-bold",
@@ -156,7 +158,7 @@ export default function CandidatesPage() {
                       <span
                         className={`font-bold p-1 ${badgeClass} rounded-md flex items-center gap-0.5`}
                       >
-                        <span>{score.toFixed(0)}%</span>
+                        <span>{score ? score.toFixed(0) : "0"}%</span>
                       </span>
                     </Badge>
                   </div>

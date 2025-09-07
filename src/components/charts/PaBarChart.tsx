@@ -207,7 +207,9 @@ export function PaBarChart({
                 <ChartTooltipContent
                   hideLabel={false}
                   formatter={(value) =>
-                    `${((Number(value) / totalResponses) * 100).toFixed(1)} %`
+                    totalResponses > 0
+                      ? `${((Number(value) / totalResponses) * 100).toFixed(0)} %`
+                      : "0 %"
                   }
                 />
               }

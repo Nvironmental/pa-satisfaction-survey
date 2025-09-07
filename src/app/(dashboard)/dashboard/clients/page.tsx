@@ -80,12 +80,15 @@ export default function ClientsPage() {
   }
 
   const score =
-    (clients.reduce(
-      (acc, client) => acc + (client.surveyCompleted ? client.score || 0 : 0),
-      0
-    ) /
-      clients.filter((client) => client.surveyCompleted).length) *
-    100;
+    clients.filter((client) => client.surveyCompleted).length > 0
+      ? (clients.reduce(
+          (acc, client) =>
+            acc + (client.surveyCompleted ? client.score || 0 : 0),
+          0
+        ) /
+          clients.filter((client) => client.surveyCompleted).length) *
+        100
+      : 0;
 
   const badgeClasses = {
     low: "bg-pa-cardinal-red text-white font-bold",
@@ -146,7 +149,7 @@ export default function ClientsPage() {
                       <span
                         className={`font-bold p-1 ${badgeClass} rounded-md flex items-center gap-0.5`}
                       >
-                        <span>{score.toFixed(0)}%</span>
+                        <span>{score ? score.toFixed(0) : "0"}%</span>
                       </span>
                     </Badge>
                   </div>
