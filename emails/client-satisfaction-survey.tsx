@@ -121,7 +121,7 @@ const header = {
   // backgroundSize: "cover",
   // backgroundPosition: "center",
   // backgroundRepeat: "no-repeat",
-  height: "217px",
+  // height: "217px",
   margin: "0px 0",
   maxWidth: "560px",
 };
