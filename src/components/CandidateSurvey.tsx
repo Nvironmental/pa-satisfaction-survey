@@ -234,19 +234,19 @@ const SurveyForm = ({ candidateId, candidateName }: SurveyFormProps) => {
         />
       </div>
 
-      <div className="h-[calc(100dvh-190px)] md:h-[calc(100dvh-320px)] pb-2 pr-8 w-full overflow-y-auto pa-scrollbar">
+      <div className="h-[calc(100dvh-190px)] md:h-[calc(100dvh-320px)] pb-2 pr-8 w-full overflow-y-auto pa-scrollbar relative">
         {/* Main Question */}
 
         <div>
-          <div className="flex items-start gap-2">
+          <div className="flex items-start gap-2 sticky top-0 bg-pa-midnight-regent z-10 py-2">
             <span className="flex items-center gap-1">
-              <span className="font-sans text-lg font-medium">
+              <span className="font-sans md:text-lg text-base font-medium">
                 {currentQuestion.id}
               </span>
               <ArrowRightIcon className="w-4 h-4" />
             </span>
 
-            <h2 className="font-sans text-lg font-medium mb-4 relative">
+            <h2 className="font-sans md:text-lg text-base font-medium mb-4 ">
               <span>{currentQuestion.question}</span>
             </h2>
           </div>

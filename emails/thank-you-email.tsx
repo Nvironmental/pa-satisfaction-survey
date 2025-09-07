@@ -177,11 +177,11 @@ export default function ThankYouEmail({
             <Row>
               <Column align="center">
                 <Img
-                  src="https://peopleasset.in/mail-assets/survey-header.png"
+                  src="https://peopleasset.in/mail-assets/survey-header-2.png"
                   srcSet="https://peopleasset.in/mail-assets/survey-header.png 1x, https://peopleasset.in/mail-assets/survey-header-2.png 2x"
                   alt="PeopleAsset Logo"
-                  width="560px"
-                  height="178px"
+                  width="560"
+                  height="178"
                   className="mx-auto my-0 bg-cover bg-center"
                 />
               </Column>

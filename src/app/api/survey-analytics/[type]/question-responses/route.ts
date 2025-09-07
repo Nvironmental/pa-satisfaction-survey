@@ -43,10 +43,18 @@ export async function POST(
       const responses = await prisma.clientSurveyAnswer.findMany({
         where: {
           questionId: questionFilter,
+          client: {
+            surveyCompleted: true,
+          },
         },
         select: {
           answer: true,
           answer_score: true,
+          client: {
+            select: {
+              surveyCompleted: true,
+            },
+          },
         },
       });
 
@@ -60,7 +68,7 @@ export async function POST(
           optionCounts.set(answer, (optionCounts.get(answer) || 0) + 1);
         }
         // Add to total score
-        if (response.answer_score !== null) {
+        if (response.answer_score !== null && response.client.surveyCompleted) {
           totalScore += response.answer_score;
         }
       });
@@ -79,10 +87,18 @@ export async function POST(
       const responses = await prisma.candidateSurveyAnswer.findMany({
         where: {
           questionId: questionFilter,
+          candidate: {
+            surveyCompleted: true,
+          },
         },
         select: {
           answer: true,
           answer_score: true,
+          candidate: {
+            select: {
+              surveyCompleted: true,
+            },
+          },
         },
       });
 
@@ -96,7 +112,10 @@ export async function POST(
           optionCounts.set(answer, (optionCounts.get(answer) || 0) + 1);
         }
         // Add to total score
-        if (response.answer_score !== null) {
+        if (
+          response.answer_score !== null &&
+          response.candidate.surveyCompleted
+        ) {
           totalScore += response.answer_score;
         }
       });
