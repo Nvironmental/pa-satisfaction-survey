@@ -3,11 +3,46 @@ import React from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "PeopleAsset - Thank You",
-  description: "Thank you for completing the candidate satisfaction survey.",
+  title: "Thank You!",
+  description:
+    "Your responses have been recorded. Your feedback helps us to improve our services and better serve our clients and candidates.",
+  openGraph: {
+    title: "Thank You!",
+    description:
+      "Your responses have been recorded. Your feedback helps us to improve our services and better serve our clients and candidates.",
+
+    siteName: "Thank You!",
+    images: [
+      {
+        url: "https://www.peopleasset.in/mail-assets/PA_Identity_FINAL_Blue_LOWRES.png",
+        width: 400,
+        height: 68,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Thank You!",
+    description:
+      "Your responses have been recorded. Your feedback helps us to improve our services and better serve our clients and candidates.",
+    images: [
+      {
+        url: "https://www.peopleasset.in/mail-assets/PA_Identity_FINAL_Blue_LOWRES.png",
+      },
+    ], // Must be an absolute URL
+  },
   robots: {
     index: false,
     follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+      "max-video-preview": -1,
+      "max-image-preview": "none",
+      "max-snippet": -1,
+    },
   },
 };
 

@@ -9,11 +9,11 @@ import { isRedirectError } from "next/dist/client/components/redirect-error";
 export const metadata: Metadata = {
   title: "PeopleAsset - Candidate Satisfaction Survey",
   description:
-    "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we'd greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
+    "At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we support professionals like you and represent you to hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities.",
   openGraph: {
     title: "PeopleAsset - Candidate Satisfaction Survey",
     description:
-      "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we'd greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
+      "At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we support professionals like you and represent you to hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities.",
 
     siteName: "PeopleAsset - Candidate Satisfaction Survey",
     images: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "PeopleAsset - Candidate Satisfaction Survey",
     description:
-      "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we'd greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
+      "At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we support professionals like you and represent you to hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities.",
     images: [
       {
         url: "https://www.peopleasset.in/mail-assets/PA_Identity_FINAL_Blue_LOWRES.png",

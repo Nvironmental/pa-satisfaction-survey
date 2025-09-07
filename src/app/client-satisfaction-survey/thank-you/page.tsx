@@ -6,15 +6,15 @@ import { Metadata } from "next";
 
 //meta tags
 export const metadata: Metadata = {
-  title: "PeopleAsset - Client Satisfaction Survey",
+  title: "Thank You!",
   description:
-    "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we’d greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
+    "Your responses have been recorded. Your feedback helps us to improve our services and better serve our clients and candidates.",
   openGraph: {
-    title: "PeopleAsset - Client Satisfaction Survey",
+    title: "Thank You!",
     description:
-      "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we’d greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
+      "Your responses have been recorded. Your feedback helps us to improve our services and better serve our clients and candidates.",
 
-    siteName: "PeopleAsset - Client Satisfaction Survey",
+    siteName: "Thank You!",
     images: [
       {
         url: "https://www.peopleasset.in/mail-assets/PA_Identity_FINAL_Blue_LOWRES.png",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PeopleAsset - Client Satisfaction Survey",
+    title: "Thank You!",
     description:
-      "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we’d greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
+      "Your responses have been recorded. Your feedback helps us to improve our services and better serve our clients and candidates.",
     images: [
       {
         url: "https://www.peopleasset.in/mail-assets/PA_Identity_FINAL_Blue_LOWRES.png",
