@@ -38,13 +38,13 @@ export async function POST(
       );
     }
 
-    // Check if survey email already sent
-    if (candidate.surveyEmailSent) {
-      return NextResponse.json(
-        { success: false, error: "Survey email already sent" },
-        { status: 400 }
-      );
-    }
+    // // Check if survey email already sent
+    // if (candidate.surveyEmailSent) {
+    //   return NextResponse.json(
+    //     { success: false, error: "Survey email already sent" },
+    //     { status: 400 }
+    //   );
+    // }
 
     // Generate survey link
     const surveyLink = `${process.env.APP_URL || "http://localhost:3000"}/candidate-satisfaction-survey/${candidate.id}`;

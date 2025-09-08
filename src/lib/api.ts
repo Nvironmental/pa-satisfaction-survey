@@ -107,7 +107,8 @@ export const clientApi = {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to send survey email");
+      const error = await response.json();
+      throw new Error(error.error);
     }
 
     const result = await response.json();
