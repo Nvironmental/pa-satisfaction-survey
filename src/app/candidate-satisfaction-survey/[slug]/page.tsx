@@ -9,11 +9,11 @@ import { isRedirectError } from "next/dist/client/components/redirect-error";
 export const metadata: Metadata = {
   title: "PeopleAsset - Candidate Satisfaction Survey",
   description:
-    "At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we support professionals like you and represent you to hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities.",
+    "At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we engage with professionals such as yourself and represent you to the hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities.",
   openGraph: {
     title: "PeopleAsset - Candidate Satisfaction Survey",
     description:
-      "At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we support professionals like you and represent you to hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities.",
+      "At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we engage with professionals such as yourself and represent you to the hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities.",
 
     siteName: "PeopleAsset - Candidate Satisfaction Survey",
     images: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "PeopleAsset - Candidate Satisfaction Survey",
     description:
-      "At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we support professionals like you and represent you to hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities.",
+      "At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we engage with professionals such as yourself and represent you to the hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities.",
     images: [
       {
         url: "https://www.peopleasset.in/mail-assets/PA_Identity_FINAL_Blue_LOWRES.png",
@@ -85,7 +85,7 @@ const Page = async ({ params }: PageProps) => {
         <TakeSurvey
           bannerClassName="hidden md:block"
           title="Candidate Satisfaction Survey"
-          description="At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we support professionals like you and represent you to hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities."
+          description="At PeopleAsset, your candidate experience matters as much as our client outcomes. If you've engaged with us during an executive search, we'd value your feedback on the process—communication, role clarity, interview preparation, and follow-through. Your insights will help us refine how we engage with professionals such as yourself and represent you to the hiring organizations. This survey takes only a few minutes; your responses will not affect any current or future opportunities."
           url={`/candidate-satisfaction-survey/survey/${slug}`}
           time="5"
         />

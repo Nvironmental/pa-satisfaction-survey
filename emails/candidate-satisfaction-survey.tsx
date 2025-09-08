@@ -59,7 +59,8 @@ export default function CandidateSatisfactionSurveyEmail({
             <Text style={text}>
               Please take a few minutes to complete our brief satisfaction
               survey. Your responses are confidential and will be used solely to
-              enhance our service quality and improve the candidate experience.
+              enhance the quality of our engagement and improve the candidate
+              experience.
             </Text>
           </Section>
 
@@ -89,7 +90,7 @@ export default function CandidateSatisfactionSurveyEmail({
             </Text>
 
             <Text style={text}>
-              Thank you for your time and continued partnership.
+              Thank you for your time and continued relationship.
             </Text>
 
             <Text style={text}>
