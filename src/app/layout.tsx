@@ -47,33 +47,35 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "PeopleAsset - Satisfaction Survey",
+  title: "PeopleAsset - Survey Dashboard",
   description:
     "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we’d greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
+
   openGraph: {
-    title: "PeopleAsset - Satisfaction Survey",
+    title: "PeopleAsset - Survey Dashboard",
     description:
       "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we’d greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
-
-    siteName: "PeopleAsset - Satisfaction Survey",
+    siteName: "PeopleAsset - Survey Dashboard",
     images: [
       {
-        url: "https://www.peopleasset.in/mail-assets/PA_Identity_FINAL_Blue_LOWRES.png",
-        width: 400,
-        height: 68,
+        url: "https://survey.peopleasset.in/web-app-manifest-512x512.png",
+        width: 512,
+        height: 512,
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "PeopleAsset - Satisfaction Survey",
+    title: "PeopleAsset - Survey Dashboard",
     description:
       "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we’d greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
     images: [
       {
-        url: "https://www.peopleasset.in/mail-assets/PA_Identity_FINAL_Blue_LOWRES.png",
+        url: "https://survey.peopleasset.in/web-app-manifest-512x512.png",
+        width: 512,
+        height: 512,
       },
-    ], // Must be an absolute URL
+    ],
+    card: "summary_large_image",
   },
   robots: {
     index: false,
