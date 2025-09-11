@@ -1,6 +1,6 @@
 {
-  "name": "PeopleAsset - Satisfaction Survey",
-  "short_name": "PeopleAsset - Satisfaction Survey",
+  "name": "PeopleAsset - CSAT Survey",
+  "short_name": "PeopleAsset - CSAT Survey",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#001640",
+  "background_color": "#001640",
   "display": "standalone"
 }
