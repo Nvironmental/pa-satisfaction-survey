@@ -47,15 +47,15 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "PeopleAsset - Survey Dashboard",
+  title: "PeopleAsset Survey Dashboard",
   description:
     "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we’d greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
 
   openGraph: {
-    title: "PeopleAsset - Survey Dashboard",
+    title: "PeopleAsset Survey Dashboard",
     description:
       "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we’d greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
-    siteName: "PeopleAsset - Survey Dashboard",
+    siteName: "PeopleAsset Survey Dashboard",
     images: [
       {
         url: "https://survey.peopleasset.in/web-app-manifest-512x512.png",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: "PeopleAsset - Survey Dashboard",
+    title: "PeopleAsset Survey Dashboard",
     description:
       "At PeopleAsset, our candidates and clients are at the center of everything we do. To ensure we continue delivering excellence in executive search, talent advisory, and leadership development, we’d greatly value your feedback on your experience with us. Your insights will help us refine our approach, strengthen our partnerships, and serve you better in the future. This survey will take only a few minutes, and your responses will remain confidential.",
     images: [
