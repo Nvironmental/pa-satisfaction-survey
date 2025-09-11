@@ -1,6 +1,6 @@
 {
-  "name": "PeopleAsset - CSAT Survey",
-  "short_name": "PeopleAsset - CSAT Survey",
+  "name": "PeopleAsset - Survey Dashboard",
+  "short_name": "PeopleAsset - Survey Dashboard",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
