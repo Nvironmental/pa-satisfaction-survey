@@ -74,6 +74,15 @@ export const metadata: Metadata = {
     ],
     card: "summary_large_image",
   },
+  manifest: "/manifest.json",
+  icons: {
+    apple: "/web-app-manifest-512x512.png",
+    icon: "/web-app-manifest-512x512.png",
+    other: {
+      rel: "icon",
+      url: "/web-app-manifest-512x512.png",
+    },
+  },
   robots: {
     index: false,
     follow: false,
