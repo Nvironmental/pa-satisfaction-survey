@@ -35,6 +35,8 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { useCreateQueryString } from "@/hooks/queryString";
 import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
+import { CandidatePdfExportButton } from "@/components/candidate-pdf-export-button";
+import { File } from "lucide-react";
 
 interface CandidateColumnsProps {
   onSuccess?: () => void;
@@ -350,6 +352,20 @@ export function createCandidateColumns({
                   isLoading={isSendingEmail}
                   disabled={isCompleted}
                 />
+
+                {/* PDF export */}
+                <DropdownMenuItem
+                  className="text-xs"
+                  onSelect={(e) => e.preventDefault()}
+                  disabled={!candidate.surveyCompleted}
+                >
+                  <CandidatePdfExportButton
+                    candidateId={candidate.id}
+                    candidateName={candidate.candidateName}
+                    surveyCompleted={candidate.surveyCompleted}
+                    disabled={!candidate.surveyCompleted}
+                  />
+                </DropdownMenuItem>
 
                 <DropdownMenuSeparator />
 

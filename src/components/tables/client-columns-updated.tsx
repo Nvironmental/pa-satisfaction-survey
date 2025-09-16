@@ -35,6 +35,7 @@ import {
   XCircle,
   User,
   CircleUserRound,
+  File,
 } from "lucide-react";
 import { Client, SurveyQuestion } from "@/lib/types";
 import { ClientForm } from "@/components/forms/client-form";
@@ -47,6 +48,7 @@ import { useRouter } from "next/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCreateQueryString } from "@/hooks/queryString";
 import { client_questions } from "@/lib/questions";
+import { PdfExportButton } from "@/components/pdf-export-button";
 
 interface ClientColumnsProps {
   onSuccess?: () => void;
@@ -353,7 +355,6 @@ export function createClientColumns({
                   <Copy className="mr-2 h-4 w-4" />
                   Copy Survey Link
                 </DropdownMenuItem>
-
                 <DialogTrigger asChild>
                   <DropdownMenuItem asChild className="text-xs">
                     <ClientForm
@@ -364,7 +365,6 @@ export function createClientColumns({
                     />
                   </DropdownMenuItem>
                 </DialogTrigger>
-
                 <SendEmailConfirmationDialog
                   trigger={
                     <DropdownMenuItem
@@ -386,8 +386,19 @@ export function createClientColumns({
                   disabled={isCompleted}
                 />
 
+                <DropdownMenuItem
+                  className="text-xs"
+                  onSelect={(e) => e.preventDefault()}
+                  disabled={!client.surveyCompleted}
+                >
+                  <PdfExportButton
+                    clientId={client.id}
+                    clientName={client.clientName}
+                    surveyCompleted={client.surveyCompleted}
+                    disabled={!client.surveyCompleted}
+                  />
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
-
                 <DeleteConfirmationDialog
                   trigger={
                     <DropdownMenuItem
