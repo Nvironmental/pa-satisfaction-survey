@@ -63,7 +63,7 @@ export async function GET(request: NextRequest) {
       "Survey Email Sent At",
       "Survey Completed",
       "Survey Completed At",
-      "Score",
+      "Score (%)",
       "Created At",
       "Updated At",
       "Created By",
@@ -76,7 +76,7 @@ export async function GET(request: NextRequest) {
         (qId) => `Question ${qId.replace("question_", "")}`
       ),
       ...sortedQuestionIds.map(
-        (qId) => `Question Score ${qId.replace("question_", "")}`
+        (qId) => `Question Score ${qId.replace("question_", "")} (%)`
       ),
     ];
 
@@ -91,7 +91,9 @@ export async function GET(request: NextRequest) {
         candidate.surveyEmailSentAt?.toISOString() || "",
         candidate.surveyCompleted ? "Yes" : "No",
         candidate.surveyCompletedAt?.toISOString() || "",
-        candidate.score?.toString() || "",
+        candidate.score !== null && candidate.score !== undefined
+          ? `${(candidate.score * 100).toFixed(1)}%`
+          : "",
         candidate.createdAt.toISOString(),
         candidate.updatedAt.toISOString(),
         candidate.createdBy,
@@ -110,12 +112,20 @@ export async function GET(request: NextRequest) {
         return answer ? answer.answer : "";
       });
 
-      // Add survey answer scores for each question
+      // Add survey answer scores for each question (as percentages)
       const scoreData = sortedQuestionIds.map((qId) => {
         const answer = candidate.surveyAnswers.find(
           (a) => a.questionId === qId
         );
-        return answer?.answer_score?.toString() || "";
+        if (
+          answer?.answer_score !== null &&
+          answer?.answer_score !== undefined
+        ) {
+          // Convert float score to percentage (assuming scores are 0-1 range)
+          const percentage = (answer.answer_score * 100).toFixed(1);
+          return `${percentage}%`;
+        }
+        return "";
       });
 
       return [...baseData, ...surveyData, ...scoreData];
