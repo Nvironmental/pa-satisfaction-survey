@@ -54,8 +54,8 @@ export default async function CandidatePreviewPage({
             Survey Not Completed
           </h1>
           <p className="text-gray-600">
-            This candidate's survey is not yet completed. Please complete the
-            survey before generating a PDF report.
+            This candidate&apos;s survey is not yet completed. Please complete
+            the survey before generating a PDF report.
           </p>
         </div>
       </div>
