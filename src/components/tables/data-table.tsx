@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/select";
 import { ClientForm } from "../forms/client-form";
 import { CandidateForm } from "../forms/candidate-form";
+import { ExportButton } from "../export-button";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -183,8 +184,18 @@ export function DataTable<TData, TValue>({
           />
         </div>
         <div className="flex flex-row gap-4 items-center justify-end">
-          {forClient && <ClientForm currentUserId={currentUserId} />}
-          {forCandidate && <CandidateForm currentUserId={currentUserId} />}
+          {forClient && (
+            <>
+              <ExportButton type="clients" disabled={isLoading} />
+              <ClientForm currentUserId={currentUserId} />
+            </>
+          )}
+          {forCandidate && (
+            <>
+              <ExportButton type="candidates" disabled={isLoading} />
+              <CandidateForm currentUserId={currentUserId} />
+            </>
+          )}
         </div>
       </div>
 
