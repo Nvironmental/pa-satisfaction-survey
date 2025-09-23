@@ -14,23 +14,45 @@ services:
   envs:
   - key: NODE_ENV
     value: production
+    scope: RUN_TIME
+    type: general
   - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
-    value: "true"
+    value: true
+    scope: RUN_TIME
+    type: general
   - key: PUPPETEER_EXECUTABLE_PATH
-    value: "/usr/bin/chromium-browser"
+    value: /usr/bin/chromium-browser
+    scope: RUN_TIME
+    type: general
   - key: DATABASE_URL
     value: "prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19IRHZXNVR2LUlZdnprNEktSGpfcm4iLCJhcGlfa2V5IjoiMDFLNTE3U05FWkpCRVBSWVJXTUNYWkRWUlMiLCJ0ZW5hbnRfaWQiOiI3MzFjNDRkZDA2NDA5MjFlY2QxOWFhMDE5NzBmZTBmZWI1MzUzNmZlYmUzYzNlZmY2MzA1ZTU4YzU4ZGI4ZDE5IiwiaW50ZXJuYWxfc2VjcmV0IjoiZDgyNTgwMjMtZmRhNy00ODUzLThiOGYtMjRmYzcxNWI4NTAwIn0.YfhZnGykgt1Ao0GXlcDmvL8QYN4wOIRYk4xdqTA0k3w"
+    scope: RUN_TIME
+    type: general
   - key: CONNECTION_STRING
     value: "postgres://731c44dd0640921ecd19aa01970fe0feb53536febe3c3eff6305e58c58db8d19:sk_HDvW5Tv-IYvzk4I-Hj_rn@db.prisma.io:5432/postgres?sslmode=require"
+    scope: RUN_TIME
+    type: general
   - key: BETTER_AUTH_SECRET
     value: "IVGfaZ9SUrj6oqaRNXCu4h6tyAv26oSm"
+    scope: RUN_TIME
+    type: general
   - key: BETTER_AUTH_URL
-    value: "https://demo-survey-24cra.ondigitalocean.app"
+    value: https://demo-survey-24cra.ondigitalocean.app
+    scope: RUN_TIME
+    type: general
   - key: SENDGRID_API_KEY
-    value: "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"
+    value: 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
+    scope: RUN_TIME
+    type: general
   - key: FROM_EMAIL
-    value: "connect@peopleasset.in"
+    value: connect@peopleasset.in
+    scope: RUN_TIME
+    type: general
   - key: NEXT_PUBLIC_APP_URL
-    value: "https://demo-survey-24cra.ondigitalocean.app"
+    value: https://demo-survey-24cra.ondigitalocean.app
+    scope: RUN_TIME
+    type: general
   - key: APP_URL
-    value: "https://demo-survey-24cra.ondigitalocean.app"
+    value: https://demo-survey-24cra.ondigitalocean.app
+    scope: RUN_TIME
+    type: general
