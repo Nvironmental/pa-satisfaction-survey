@@ -65,6 +65,32 @@ export async function GET(
     console.log("🔍 Request protocol:", request.nextUrl.protocol);
     console.log("🔍 Request hostname:", request.nextUrl.hostname);
     
+    // Get the correct domain from forwarded headers (for production deployments)
+    const forwardedHost = request.headers.get("x-forwarded-host");
+    const forwardedProto = request.headers.get("x-forwarded-proto");
+    
+    // Use environment variables for base URL configuration
+    const envAppUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL;
+    let actualHost: string;
+    let actualProtocol: string;
+    
+    if (envAppUrl) {
+      const envUrl = new URL(envAppUrl);
+      actualHost = envUrl.hostname;
+      actualProtocol = envUrl.protocol.replace(':', '');
+      console.log("🔍 Using environment URL:", envAppUrl);
+    } else {
+      actualHost = forwardedHost || request.nextUrl.hostname;
+      actualProtocol = forwardedProto || request.nextUrl.protocol;
+      console.log("🔍 Using forwarded headers");
+    }
+    
+    console.log("🔍 Forwarded host:", forwardedHost);
+    console.log("🔍 Forwarded proto:", forwardedProto);
+    console.log("🔍 Environment URL:", envAppUrl);
+    console.log("🔍 Actual host for cookies:", actualHost);
+    console.log("🔍 Actual protocol for cookies:", actualProtocol);
+    
     if (cookies) {
       console.log("🍪 Raw cookies from request:", cookies);
       
@@ -90,10 +116,10 @@ export async function GET(
           const cookieObj = {
             name,
             value: decodedValue,
-            domain: request.nextUrl.hostname,
+            domain: actualHost,
             path: "/",
             httpOnly: false,
-            secure: request.nextUrl.protocol === "https",
+            secure: actualProtocol === "https",
           };
           
           console.log(`✅ Cookie object created:`, cookieObj);
@@ -104,10 +130,10 @@ export async function GET(
           return {
             name,
             value: rawValue,
-            domain: request.nextUrl.hostname,
+            domain: actualHost,
             path: "/",
             httpOnly: false,
-            secure: request.nextUrl.protocol === "https",
+            secure: actualProtocol === "https",
           };
         }
       }).filter((cookie): cookie is NonNullable<typeof cookie> => cookie !== null);
@@ -130,7 +156,7 @@ export async function GET(
     }
 
     // Get the base URL from the request
-    const baseUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}`;
+    const baseUrl = `${actualProtocol}//${actualHost}`;
     const previewUrl = `${baseUrl}/dashboard/candidates/${id}/preview`;
     
     console.log("🌐 Base URL:", baseUrl);
