@@ -386,7 +386,7 @@ export function createClientColumns({
                   disabled={isCompleted}
                 />
 
-                <DropdownMenuItem
+                {/* <DropdownMenuItem
                   className="text-xs"
                   onSelect={(e) => e.preventDefault()}
                   disabled={!client.surveyCompleted}
@@ -397,7 +397,7 @@ export function createClientColumns({
                     surveyCompleted={client.surveyCompleted}
                     disabled={!client.surveyCompleted}
                   />
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 <DropdownMenuSeparator />
                 <DeleteConfirmationDialog
                   trigger={

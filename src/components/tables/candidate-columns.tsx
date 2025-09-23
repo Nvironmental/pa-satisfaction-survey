@@ -354,7 +354,7 @@ export function createCandidateColumns({
                 />
 
                 {/* PDF export */}
-                <DropdownMenuItem
+                {/* <DropdownMenuItem
                   className="text-xs"
                   onSelect={(e) => e.preventDefault()}
                   disabled={!candidate.surveyCompleted}
@@ -365,7 +365,7 @@ export function createCandidateColumns({
                     surveyCompleted={candidate.surveyCompleted}
                     disabled={!candidate.surveyCompleted}
                   />
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
 
                 <DropdownMenuSeparator />
 
