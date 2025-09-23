@@ -71,25 +71,32 @@ export async function GET(
     
     // Use environment variables for base URL configuration
     const envAppUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL;
-    let actualHost: string;
-    let actualProtocol: string;
+    let baseUrl: string;
     
     if (envAppUrl) {
-      const envUrl = new URL(envAppUrl);
-      actualHost = envUrl.hostname;
-      actualProtocol = envUrl.protocol.replace(':', '');
+      baseUrl = envAppUrl;
       console.log("🔍 Using environment URL:", envAppUrl);
     } else {
-      actualHost = forwardedHost || request.nextUrl.hostname;
-      actualProtocol = forwardedProto || request.nextUrl.protocol;
-      console.log("🔍 Using forwarded headers");
+      // Fallback to forwarded headers
+      const forwardedPort = request.headers.get("x-forwarded-port");
+      const requestPort = request.nextUrl.port;
+      const port = forwardedPort || requestPort || "3000";
+      const host = forwardedHost || request.nextUrl.hostname;
+      const protocol = forwardedProto || request.nextUrl.protocol;
+      
+      baseUrl = `${protocol}//${host}${port ? `:${port}` : ""}`;
+      console.log("🔍 Using forwarded headers with port:", port);
     }
     
     console.log("🔍 Forwarded host:", forwardedHost);
     console.log("🔍 Forwarded proto:", forwardedProto);
     console.log("🔍 Environment URL:", envAppUrl);
-    console.log("🔍 Actual host for cookies:", actualHost);
-    console.log("🔍 Actual protocol for cookies:", actualProtocol);
+    console.log("🔍 Base URL:", baseUrl);
+    
+    // Extract host and protocol for cookies
+    const baseUrlObj = new URL(baseUrl);
+    const actualHost = baseUrlObj.hostname;
+    const actualProtocol = baseUrlObj.protocol;
     
     if (cookies) {
       console.log("🍪 Raw cookies from request:", cookies);
@@ -119,7 +126,7 @@ export async function GET(
             domain: actualHost,
             path: "/",
             httpOnly: false,
-            secure: actualProtocol === "https",
+            secure: actualProtocol === "https:",
           };
           
           console.log(`✅ Cookie object created:`, cookieObj);
@@ -133,7 +140,7 @@ export async function GET(
             domain: actualHost,
             path: "/",
             httpOnly: false,
-            secure: actualProtocol === "https",
+            secure: actualProtocol === "https:",
           };
         }
       }).filter((cookie): cookie is NonNullable<typeof cookie> => cookie !== null);
@@ -155,8 +162,7 @@ export async function GET(
       console.log("❌ No cookies found in request headers");
     }
 
-    // Get the base URL from the request
-    const baseUrl = `${actualProtocol}//${actualHost}`;
+    // Use the base URL we already constructed
     const previewUrl = `${baseUrl}/dashboard/candidates/${id}/preview`;
     
     console.log("🌐 Base URL:", baseUrl);
