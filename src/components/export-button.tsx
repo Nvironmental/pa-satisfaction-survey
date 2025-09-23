@@ -67,7 +67,7 @@ export function ExportButton({ type, disabled = false }: ExportButtonProps) {
       ) : (
         <>
           <Download className="h-4 w-4 mr-2" />
-          Export {type.slice(0, -1)} responses
+          Export {type.charAt(0).toUpperCase() + type.slice(1, -1)} Responses
         </>
       )}
     </Button>
