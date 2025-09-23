@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/auth";
+import { launchPuppeteerBrowser } from "@/lib/puppeteer-config";
 
 // GET /api/clients/[id]/export-pdf - Export individual client survey as PDF
 export async function GET(
@@ -33,12 +34,8 @@ export async function GET(
       );
     }
 
-    // Generate PDF using Puppeteer
-    const puppeteer = await import("puppeteer");
-    const browser = await puppeteer.default.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    // Generate PDF using Puppeteer with environment-aware configuration
+    const browser = await launchPuppeteerBrowser();
 
     const page = await browser.newPage();
 
