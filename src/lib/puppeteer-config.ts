@@ -21,8 +21,8 @@ export function getPuppeteerConfig(): PuppeteerLaunchOptions {
 
   // For Digital Ocean deployment (production)
   if (isProduction && isDigitalOcean) {
-    // Use the Chromium installed in Docker container
-    config.executablePath = '/usr/bin/chromium-browser';
+    // Use Google Chrome installed in Docker container (Daniel's proven approach)
+    config.executablePath = '/usr/bin/google-chrome-stable';
     config.args.push(
       '--disable-dev-shm-usage',
       '--disable-gpu',
@@ -56,7 +56,29 @@ export async function launchPuppeteerBrowser() {
     const browser = await puppeteer.default.launch(config);
     return browser;
   } catch (error) {
-    console.error('Failed to launch Puppeteer:', error);
-    throw error;
+    console.error('Failed to launch Puppeteer with config:', config);
+    console.error('Error:', error);
+    
+    // Fallback: try without executablePath (let Puppeteer find Chrome)
+    console.log('Trying fallback: letting Puppeteer find Chrome automatically...');
+    const fallbackConfig = {
+      headless: true,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--single-process',
+      ],
+    };
+    
+    try {
+      const browser = await puppeteer.default.launch(fallbackConfig);
+      console.log('Fallback successful: Puppeteer found Chrome automatically');
+      return browser;
+    } catch (fallbackError) {
+      console.error('Fallback also failed:', fallbackError);
+      throw error; // Throw original error
+    }
   }
 }

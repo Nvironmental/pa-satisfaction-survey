@@ -1,29 +1,66 @@
-# Multi-stage build for Digital Ocean App Platform with 512MB RAM
-FROM node:18-alpine AS builder
+# Based on Daniel Grychtoł's proven approach for Puppeteer on DigitalOcean App Platform
+# https://danielgrychtol.com/posts/app-platform-puppeteer
+FROM node:18-slim
 
-# Install Chromium and dependencies for Puppeteer
-RUN apk add --no-cache \
-    chromium \
-    nss \
-    freetype \
-    freetype-dev \
-    harfbuzz \
-    ca-certificates \
-    ttf-freefont
+WORKDIR /usr/src/app
 
-# Set Puppeteer environment variables
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
-
-WORKDIR /app
-
-# Copy package files (both package.json and bun.lock for compatibility)
+# Copy package files
 COPY package*.json ./
 COPY bun.lock ./
 
-# Install dependencies using npm (Digital Ocean standard)
-# This ensures consistency between local Bun and production npm
-RUN npm ci --only=production
+# Install dependencies
+RUN npm ci --only=production && npm cache clean --force
+
+# Install Chrome for Puppeteer
+RUN npx puppeteer browsers install chrome
+
+# Install Chrome dependencies (proven to work on DigitalOcean App Platform)
+RUN apt-get update && apt-get install -y \
+    fonts-noto-color-emoji \
+    gconf-service \
+    libasound2 \
+    libatk1.0-0 \
+    libc6 \
+    libcairo2 \
+    libcups2 \
+    libdbus-1-3 \
+    libexpat1 \
+    libfontconfig1 \
+    libgcc1 \
+    libgconf-2-4 \
+    libgdk-pixbuf2.0-0 \
+    libdrm2 \
+    libglib2.0-0 \
+    libgtk-3-0 \
+    libgbm1 \
+    libnspr4 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libstdc++6 \
+    libx11-6 \
+    libx11-xcb1 \
+    libxcb1 \
+    libxcomposite1 \
+    libxcursor1 \
+    libxdamage1 \
+    libxext6 \
+    libxfixes3 \
+    libxi6 \
+    libxrandr2 \
+    libxrender1 \
+    libxss1 \
+    libxtst6 \
+    ca-certificates \
+    fonts-liberation \
+    libappindicator1 \
+    libnss3 \
+    lsb-release \
+    xdg-utils \
+    wget \
+    xz-utils \
+    --no-install-recommends \
+    && apt-get purge --auto-remove -y curl \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy source code
 COPY . .
@@ -34,38 +71,10 @@ RUN npx prisma generate
 # Build the application
 RUN npm run build
 
-# Production stage
-FROM node:18-alpine AS production
-
-# Install only Chromium (no dev dependencies)
-RUN apk add --no-cache \
-    chromium \
-    nss \
-    freetype \
-    harfbuzz \
-    ca-certificates \
-    ttf-freefont
-
 # Set Puppeteer environment variables
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 ENV NODE_ENV=production
-
-WORKDIR /app
-
-# Copy built application from builder stage
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/bun.lock ./
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/next.config.ts ./
-
-# Create non-root user for security
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
-USER nextjs
 
 # Expose port
 EXPOSE 3000
