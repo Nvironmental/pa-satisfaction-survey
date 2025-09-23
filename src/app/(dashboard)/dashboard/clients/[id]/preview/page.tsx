@@ -14,7 +14,11 @@ export default async function ClientPreviewPage({
   // For testing purposes, we'll bypass authentication
   // In production, you should implement proper session validation
   const cookieStore = await cookies();
-  const sessionToken = cookieStore.get("better-auth.session_token")?.value;
+  
+  // Check for both cookie names (local vs production)
+  const sessionToken = 
+    cookieStore.get("better-auth.session_token")?.value ||
+    cookieStore.get("__Secure-better-auth.session_token")?.value;
 
   // If no session token, redirect to auth
   if (!sessionToken) {
