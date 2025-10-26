@@ -1,5 +1,9 @@
 # Patch Notes
 
+## 26 Oct (2)
+
+- Updated cache for app manifest icons
+
 ## 26 Oct (1)
 
 - Updated the web app manifest icons

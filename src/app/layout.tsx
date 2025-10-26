@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     siteName: "PeopleAsset Survey Dashboard",
     images: [
       {
-        url: "https://survey.peopleasset.in/web-app-manifest-512x512.png",
+        url: "https://survey.peopleasset.in/web-app-manifest-512x512.png?t=1",
         width: 512,
         height: 512,
       },
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     description: " ",
     images: [
       {
-        url: "https://survey.peopleasset.in/web-app-manifest-512x512.png",
+        url: "https://survey.peopleasset.in/web-app-manifest-512x512.png?t=1",
         width: 512,
         height: 512,
       },
@@ -76,11 +76,11 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   icons: {
-    apple: "/web-app-manifest-512x512.png",
-    icon: "/web-app-manifest-512x512.png",
+    apple: "/web-app-manifest-512x512.png?t=1",
+    icon: "/web-app-manifest-512x512.png?t=1",
     other: {
       rel: "icon",
-      url: "/web-app-manifest-512x512.png",
+      url: "/web-app-manifest-512x512.png?t=1",
     },
   },
   robots: {
